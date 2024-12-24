@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="icon" href="https://i.ibb.co/G3XDtMJ/Logoapp.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Iceland&display=swap" rel="stylesheet">
+    <!-- Croppie -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden; 
+            box-sizing: border-box;
+            font-family: "Iceland", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            background-color: #f0f2f5;
+            color: #1F4E67;
+            font-size: 22px;
+        }
+        .container-fluid {
+            padding-left: 0;
+            padding-right: 0;
+            margin: 0; 
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .red-bordered-container {
+            background-color: #d71d00;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            padding: 50px;
+            display: flex;
+            z-index: 10; 
+            justify-content: center;
+            align-items: center;
+            min-height: 200px; 
+        }
+        .blue-bordered-container {
+            background-color: #1F4E67;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            padding: 10px ;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            .blue-bordered-container {
+                margin-bottom: 5rem;
+            }
+            .header {
+                flex-direction: column;
+            }
+            .header .image-column {
+                order: 2; 
+            }
+            .header .text-column {
+                order: 1; 
+            }
+        }
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-nav .nav-link {
+            font-family: 'Play', sans-serif;
+            font-size: 15px;
+        }
+        .navbar-nav .nav-item .nav-link.registro {
+            background-color: #d71d00;
+            color: white;
+        }
+        .navbar-nav .nav-item .nav-link.registro:hover {
+            background-color: #4e1d16;
+        }
+        .navbar-nav .nav-item .nav-link.ingreso {
+            background-color: #1F4E67;
+            color: white;
+        }
+        .navbar-nav .nav-item .nav-link.ingreso:hover {
+            background-color: #093f46;
+        }
+        .navbar-nav .nav-item .nav-link.info {
+            color: #000000;
+            background: none;
+        }
+        .navbar-nav .nav-link.info:hover {
+            background-color: #dcdcdc;
+        }
+        @keyframes parpadeo {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.parpadea {
+    animation: parpadeo 3s infinite;
+}
+
+      .header {
+            background: linear-gradient(to bottom, #2c758c, #f173606d);
+        }
+        .header .image-column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header .image-column img {
+            width: 100%;
+            height: auto;
+        }
+        .header .text-column {
+            padding: 20px;
+        }
+        .header .text-column .slogan-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .more-info-button {
+            display: inline-block;
+            margin: 20px auto 30px auto;
+            padding: 10px 20px;
+            background-color: #1F4E67;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+        }
+        .more-info-button:hover {
+            background-color: #08161b;
+        }
+        .info-section {
+            padding: 50px ;
+        }
+        .info-section h2 {
+            color: #d71d00;
+        }
+        .card {
+            background-color: transparent;
+            border: none;
+        }
+        .btn-primary {
+            background-color: #d71d00;
+            border-color: #d71d00;
+        }
+        .btn-primary:hover {
+            background-color: #4e1d16;
+            border-color: #4e1d16;
+        }
+        .info-button {
+            width: auto;
+            display: block;
+            margin: 20px auto 0;
+        }
+        .form-container {
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(to bottom, #1F4E67, #d71d00);
+            border-radius: 30px;
+            padding: 10px;
+            overflow: hidden;
+            margin-left: auto;
+            margin-right: 0;
+        }
+        .form-group input,
+        #registerForm input {
+            border-radius: 30px;
+            border: 1px solid #1F4E67;
+            padding: 10px;
+        }
+        #cameraButton {
+            display: inline-block;
+            text-align: center;
+        }
+        #croppie-container {
+            margin: 0 auto;
+            display: none;
+        }
+        .btn-crop-position {
+            margin-top: 10px;
+        }
+        .btn-crop-position-1 {
+            margin-top: 5px;
+        }
+        #cropped-image-preview img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 50%;
+        }
+        .signature-pad {
+            width: 100%;
+            height: 150px;
+            padding: 0 1rem;
+        }
+        #signature-pad {
+            display: flex;
+            justify-content: center;
+        }
+        #signature-pad canvas {
+            border: 1px solid #f21414;
+            border-radius: 20px;
+            background-color: white;
+        }
+        .signature-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+            margin-top: 5px;
+            position: relative;
+            margin-left: 10px;
+        }
+        .signature-buttons button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+        }
+        .btn-danger {
+            background-color: #df2508;
+            border: none;
+            color: white;
+        }
+        .btn-danger:hover {
+            background-color: #5f1105;
+            color: white;
+        }
+        #confirm-signature {
+            margin-top: 20px;
+        }
+        .btn-info {
+            background-color: #1F4E67;
+            border: none;
+            color: white;
+        }
+        .btn-info:hover {
+            background-color: #061214;
+            color: white;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .credential-container {
+            min-width: 320px;
+            min-height: 190px; 
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 13px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            background-image: url('https://storage.googleapis.com/humansystem/HUMAN%20ID.png');
+            background-size: cover;
+            background-position: center;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .credential-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #000;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+        #credential-image-preview img {
+            width: 100%;
+            max-width: 120px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .credential-container {
+                width: 60%; 
+                height: auto; 
+            }
+            #credential-image-preview img {
+                width: 120px; 
+                height: 120px;
+                object-fit: cover;
+            }
+        }
+        .document-container {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin: auto;
+            max-width: 600px;
+        }
+        .document-image {
+            width: 60%;
+            height: auto;
+            max-width: 600px; 
+            object-fit: cover;
+            display: block;
+            margin: auto; 
+        }
+        #document-image-preview {
+            position: absolute;
+            top: 30; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        #document-image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            border-radius: 50%;
+        }
+        @media (max-width: 768px) {
+            .blue-bordered-container,
+            .red-bordered-container {
+                width: 100%;
+                padding: 20px 10px; 
+                margin: 0; 
+                box-sizing: border-box; 
+            }
+            .document-container {
+                width: 100%;
+                max-width: 100%; 
+            }
+            #document-image-preview {
+                width: 120px; 
+                height: 120px;
+                top: 37%; 
+            }
+            .document-image {
+                max-width: 100%;
+                height: auto; 
+            }
+        }
+        .brand-name {
+            font-size: 40px;
+        }
+        .blue-text {
+            color: #1F4E67;
+        }
+        .red-text {
+            color: #f40023;
+        }
+        .uppercase-input {
+            text-transform: uppercase;
+        }
+        .footer {
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            font-size: 15px;
+        }
+        .footer img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+        }
+        #gif, #image {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+   <!-- Nav -->
+   <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand animate__animated animate__fadeInDown" href="#">
+        <img class="align-items-center" src="https://storage.googleapis.com/humansystem/simp-logo.png" width="auto" height="60" alt="Logo">
+        <span class="brand-name font-weight-bold">
+            <em>
+                <span class="blue-text">Human</span> 
+                <span class="red-text">System</span>
+            </em>
+        </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="color: black; border-color: black;">
+        <span class="" style="color: black;"><i class="fas fa-bars"></i></span>
+    </button>
+    <div class="collapse navbar-collapse animate__animated animate__fadeInDown" id="navbarNav">
+        <ul class="navbar-nav  ml-auto align-items-center">
+            <li class="nav-item">
+                <a class="nav-link info parpadea" href="#info">
+                    <i class="fas fa-info-circle" style="font-size: 15px;"></i>
+                </a>
+            </li>   
+            <li class="nav-item">
+                <a class="nav-link registro pl-2 pr-2"  href="#register"><i class="fas fa-user-plus" style="font-size: 15px; "></i>  Regístrate</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ingreso pl-2 pr-2" href="login" ><i class="fas fa-user mr-2" style="font-size: 15px;"></i>Ingresa</a>
+            </li>
+        </ul>
+    </div>
+    </nav>
+    <!-- Header -->
+    <header class="header row no-gutters">
+        <div id="carouselExampleIndicators" class="carousel slide col-md-7 mt-5 image-column" data-ride="carousel">
+            <!-- Indicadores del carrusel -->
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+    
+            <!-- Imágenes del carrusel -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://storage.googleapis.com/humansystem/header1.png" alt="Identificación Humana 1" class="d-block w-100 animate__animated animate__zoomIn">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://storage.googleapis.com/humansystem/header2.png" alt="Identificación Humana 2" class="d-block w-100 animate__animated animate__zoomIn">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://storage.googleapis.com/humansystem/header3.png" alt="Identificación Humana 3" class="d-block w-100 animate__animated animate__zoomIn">
+                </div>
+            </div>
+    
+            <!-- Controles del carrusel -->
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    
+        <div class="col-md-5 text-center d-flex justify-content-center align-items-center text-column">
+            <div class="m-5">
+                <h1 id="mainHeading" class="animate__animated animate__fadeInDown font-weight-bold parpadea" style="color: #1F4E67; font-size: 60px;">
+                    <em>¡Identificado siempre!</em>
+                </h1>
+                <p id="mainParagraph" class="animate__animated parpadea" style="color: #d71d00;">
+                    Innovando a cada segundo <i class="fas fa-stopwatch"></i>
+                </p>
+                
+                <!-- Botón para cambiar de idioma -->
+                <button class="more-info-button dropdown-toggle btn-info" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-globe parpadea mr-2"></i> <span id="languageText" class="parpadea"></span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                    <a class="dropdown-item" href="#" onclick="changeLanguage('es')">Español</a>
+                   <!--  <a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a>
+                    <a class="dropdown-item" href="#" onclick="changeLanguage('fr')">Français</a>
+                    <a class="dropdown-item" href="#" onclick="changeLanguage('it')">Italiano</a>
+                    <a class="dropdown-item" href="#" onclick="changeLanguage('zh')">中文</a>
+                    <a class="dropdown-item" href="#" onclick="changeLanguage('ru')">Русский</a>
+                    <a class="dropdown-item" href="#" onclick="changeLanguage('de')">Deutsch</a>
+                    <a class="dropdown-item" href="#" onclick="changeLanguage('pt')">Português</a>
+                    <a class="dropdown-item" href="#" onclick="changeLanguage('ar')">العربية</a>
+                    <a class="dropdown-item" href="#" onclick="changeLanguage('ko')">한국어</a> -->
+                </div>                
+            </div>
+        </div>
+    </header>
+    <!-- Information -->
+    <section id="info" class="info-section text-center">
+        <div class="container mt-3">
+            <h1 class="font-weight-bold" style="font-size: 50px; color:#d71d00;"><em>Sistema de identificación humana</em></h1>
+            <p style="color: #d71d00;">Ofrecemos soluciones en la gestión de identidades con un sistema de tres elementos  principales :</p>
+            <div class="row">
+                <!-- Tarjeta -->
+                <div class="col-md-4">
+                    <div class="card animate__animated animate__fadeInLeft">
+                        <h3 class="font-weight-bold"><em>Tarjeta Física y Digital</em></h3>
+                        <p>Ofrecemos una tarjeta que combina identidad física y digital.</p>
+                        <button class="btn btn-primary info-button" onclick="showVideo('video1.mp4')">1</button>
+                        <div class="image-container mb-3">
+                            <img src="https://storage.googleapis.com/humansystem/body1.png" alt="Tarjeta Física y Digital" width="80%">
+                        </div>
+                    </div>
+                </div>
+                <!-- Plataforma -->
+                <div class="col-md-4">
+                    <div class="card animate__animated animate__fadeInUp">
+                        <h3 class="font-weight-bold"><em>Plataforma Integral</em></h3>
+                        <p>Nuestra plataforma integral gestiona todas tus identidades sociales.</p>
+                        <div class="image-container ">
+                             <!-- GIF que se muestra inicialmente -->
+                             <img id="gif" src="https://storage.googleapis.com/humansystem/GIF%20(2).gif" alt="Plataforma Integral">
+                            <!-- Imagen estática -->
+                            <img id="image" src="https://storage.cloud.google.com/humansystem/body2.png" alt="Plataforma Integral" style="cursor: pointer;" onclick="restartGIF()">
+                        </div>
+                        <button class="btn btn-primary info-button mb-4" onclick="showVideo('video2.mp4')">2</button>
+                    </div>
+                </div>
+                <!-- QR -->
+                <div class="col-md-4">
+                    <div class="card animate__animated animate__fadeInRight">
+                        <h3 class="font-weight-bold"><em>Verificación de Códigos QR</em></h3>
+                        <p>Verifica y gestiona tus códigos de identidad de manera segura con QR codes.</p>
+                        <button class="btn btn-primary info-button" onclick="showVideo('video3.mp4')">3</button>
+                        <div class="image-container mt-2">
+                            <a href="https://qrcode-ai.com/es" target="_blank">
+                                <img src="https://storage.googleapis.com/humansystem/body3.png" alt="Verificación de Códigos" width="auto" height="200">
+                            </a>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Registro -->
+    <section id="register">
+        <div class="container-fluid"> 
+            <div class="row">
+                 <!-- Red y Blue Bordered Container (credenciales) -->
+                 <div class="col-md-6 d-flex flex-column align-items-start "   style="position: sticky; top: 80px; align-self: flex-start;"> 
+                <!-- Red Bordered Container -->
+                <div class="red-bordered-container animate__animated animate__fadeInLeft">
+                    <div class="credential-container ">
+                        <div class="credential-content ">
+                            <div id="credential-image-preview"  style="text-align: center;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blue Bordered Container (documento) -->
+                <div class="blue-bordered-container mt-n5 animate__animated animate__fadeInLeft">
+                    <div class="document-container mt-5" style="position: relative;">
+                        <img src="https://storage.googleapis.com/humansystem/Certificate.png" alt="Documento" class="document-image mt-5 mb-5">
+                        <div id="document-image-preview" style="text-align: center;"></div>
+                    </div>
+                </div>
+            </div>
+                <!-- Form Section -->
+                    <div class="col-md-6 justify-content-left ">
+                        <div class="container-fluid"> 
+                        <div id="Validacion">
+                            <div class="form-body form-container">
+                                <form id="registerForm" enctype="multipart/form-data" class="animate__animated animate__fadeInUp">
+                                    <div class="pl-4 pr-4 pt-4 pb-2" style="box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1); background-color: white; border-radius: 30px;">
+                                        <h1 class="mb-4 font-weight-bold" style="text-align: center; font-size: 40px;">
+                                        <em> Formulario de registro</em>
+                                        </h1>
+                                        <div class="form-group" style="text-align: center; ">
+                                            <label for="inputFotoPerfil"><i class="mr-2 fas fa-camera"></i>Foto de Perfil</label><br>
+                                            <input type="file" id="inputFotoPerfil" class="custom-file-input" accept="image/*" style="display: none;" onchange="loadProfileImage(event)">
+                                            <button id="cameraButton" class="btn btn-outline-secondary mt-1" type="button" style="border-radius: 50px;" onclick="document.querySelector('#inputFotoPerfil').click()">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                            <div id="croppie-container"></div>
+                                            <!-- Campo oculto para almacenar la imagen recortada con el nombre 'fotoPerfil' -->
+                                            <input type="hidden" id="croppedImage64" name="fotoPerfil">
+                                            <div id="cropped-image-preview" class="" style="text-align: center;"></div>
+                                            <button type="button" id="cropButton" class="btn btn-success btn-crop-position" onclick="cropProfileImage()" style="display:none;">
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            </button>
+                                            <button type="button" id="changeImageButton" class="btn btn-warning btn-crop-position-1 mt-5" onclick="changeImage()" style="display:none;">
+                                                <i class="fa fa-undo" aria-hidden="true"></i>
+                                            </button>                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputNombre" ><i class="mr-2 fas fa-user"></i>Nombre Completo</label>
+                                            <input type="text" class="form-control uppercase-input" name="nombre" id="inputNombre" placeholder="Nombre(s) Apellido Paterno Apellido Materno" maxlength="100" required pattern="[A-Za-zÀ-ÖØ-öø-ÿÑñÄËÏÖÜäëïöü\s]+" title="Por favor ingresa tu nombre completo" oninput="this.value = this.value.toUpperCase()">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputCorreo"><i class="mr-2 fas fa-envelope"></i>Correo</label>
+                                                <input type="email" class="form-control uppercase-input" name="correo" id="inputCorreo" placeholder="correo@gmail.com" required oninput="this.value = this.value.toUpperCase()">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputCelular"><i class="mr-2 fas fa-mobile-alt"></i>Celular</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <select class="form-control" id="countryCode" name="countryCode">
+                                                            <option value="+52">+52</option>
+                                                            <!-- Añade más códigos de país según sea necesario -->
+                                                        </select>
+                                                    </div>
+                                                    <input type="tel" class="form-control" name="telefono" id="inputCelular" placeholder="1234567890" minlength="10" maxlength="10" pattern="[0-9]{10}" title="Debe contener exactamente 10 dígitos numéricos" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputCURP"><i class="mr-2 fas fa-user-circle"></i>CURP</label>
+                                                <input type="text" class="form-control uppercase-input" name="curp" id="inputCURP" placeholder="CURP" minlength="18" maxlength="18"pattern="[A-ZÑÁÉÍÓÚ0-9]{18}" title="Debe contener exactamente 18 caracteres alfanuméricos" required oninput="this.value = this.value.toUpperCase()">
+                                            </div>                                        
+                                            <div class="form-group col-md-6">
+                                                <label for="inputRFC"><i class="mr-2 fas fa-money-bill-alt"></i>RFC</label>
+                                                <input type="text" class="form-control uppercase-input" name="rfc" id="inputRFC" placeholder="RFC" minlength="13" maxlength="13" pattern="[A-ZÑÁÉÍÓÚ0-9]{13}" title="Debe contener exactamente 13 caracteres alfanuméricos" required oninput="this.value = this.value.toUpperCase()">
+                                            </div>                                        
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputFechaNacimiento"><i class="mr-2 fas fa-calendar-alt"></i>Fecha de Nac.</label>
+                                                <input type="date" class="form-control" name="fechaNacimiento" id="inputFechaNacimiento" required>
+                                            </div>
+                                            <div class="form-group col-md-9">
+                                                <label for="inputDireccion"><i class="mr-2 fas fa-map-marker-alt"></i>Dirección de entrega</label>
+                                                <input type="text" class="form-control" name="direccion" id="inputDireccion" placeholder="Dirección" maxlength="200" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword1"><i class="mr-2 fas fa-lock"></i>Contraseña</label>
+                                                <input type="password" class="form-control" name="contrasena1" id="inputPassword1" required minlength="8" maxlength="20">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword2"><i class="mr-2 fas fa-lock"></i>Confirmar Contraseña</label>
+                                                <input type="password" class="form-control" name="contrasena2" id="inputPassword2" required minlength="8" maxlength="20">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="text-align: center;">
+                                            <label for="inputFirma"><i class="mr-2 fas fa-signature"></i>Firma</label>
+                                            <div id="signature-preview"></div>
+                                            <div id="signature-pad" class="signature-pad">
+                                                <canvas></canvas>
+                                                <div class="signature-buttons">
+                                                    <button id="undo-signature" type="button" class="btn btn-warning" title="Deshacer último trazo"><i class="fa fa-undo" aria-hidden="true"></i></button>
+                                                    <button id="clear-signature" type="button" class="btn btn-danger" title="Limpiar lienzo"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    <button type="button" id="confirm-signature" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="firmaDigital" id="firmaInput">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-check text-center">
+                                                <input class="form-check-input mt-2" type="checkbox" id="gridCheck" required>
+                                                <label class="form-check-label" for="gridCheck">
+                                                    Acepto los <a href="#termsModal" data-toggle="modal" data-target="#termsModal">términos y condiciones</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button type="submit" class="btn btn-info"><i class="fas fa-save mr-2"></i>Guardar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div> 
+        </div>
+    </div>
+     <!-- Footer -->
+     <footer class="footer mt-5">
+        <div class="mt-3" style="display: flex; flex-direction: column; align-items: center;">
+            <a href="#" class="mb-2">
+                <img src="https://storage.googleapis.com/humansystem/Logo.png" style="border-radius: 20px;" width="80" height="80" alt="Logo">
+            </a>
+            <small class=" font-weight-bold" style="text-align: center; color: #000000; font-family: 'Play', sans-serif;">
+            © 2024 Human Technology Identification.<br>Todos los derechos reservados.<br>
+            </small> 
+        </div><div id="card-element"></div>
+    </footer>
+    <script>
+        const languages = [
+            { code: 'es', name: 'Idioma', h1: '¡Identificado siempre!', p: 'Innovando a cada segundo' }, // Español
+           /*  { code: 'en', name: 'Language', h1: 'Always identified', p: 'Innovating every second' },   // Inglés
+            { code: 'fr', name: 'Langue', h1: 'Toujours identifié', p: 'Innover à chaque seconde' },   // Francés
+            { code: 'it', name: 'Lingua', h1: 'Sempre identificato', p: 'Innovando ogni secondo' },   // Italiano
+            { code: 'zh', name: '语言', h1: '始终识别', p: '每一秒都在创新' },                             // Chino
+            { code: 'ru', name: 'Язык', h1: 'Всегда идентифицирован', p: 'Инновации каждую секунду' },  // Ruso
+            { code: 'de', name: 'Sprache', h1: 'Immer identifiziert', p: 'Jede Sekunde innovativ' },    // Alemán
+            { code: 'pt', name: 'Língua', h1: 'Sempre identificado', p: 'Inovando a cada segundo' },    Portugués
+            { code: 'ar', name: 'لغة', h1: 'مُعرَّف دائمًا', p: 'الابتكار في كل ثانية' },                 Árabe
+            { code: 'ko', name: '언어', h1: '항상 식별됨', p: '매 순간 혁신' }                             // Coreano */
+        ];
+    
+        let currentIndex = 0;
+        const languageText = document.getElementById('languageText');
+        const mainHeading = document.getElementById('mainHeading');
+        const mainParagraph = document.getElementById('mainParagraph');
+    
+        // Intervalo que cambia el idioma cada 6 segundos
+        let languageInterval = setInterval(() => {
+            setTimeout(changeLanguageText, 3000);
+        }, 6000);
+    
+        // Función para actualizar el texto del encabezado dinámicamente
+        function updateText() {
+            languageText.textContent = languages[currentIndex].name;
+            mainHeading.innerHTML = `<em>${languages[currentIndex].h1}</em>`;
+            mainParagraph.innerHTML = `${languages[currentIndex].p} <i class="fas fa-stopwatch"></i>`;
+        }
+    
+        updateText(); // Mostrar el texto inicial
+    
+        function changeLanguageText() {
+            currentIndex = (currentIndex + 1) % languages.length;
+            updateText();
+        }
+    
+        function changeLanguage(languageCode) {
+    const translation = translations[languageCode];
+
+    // Detener el intervalo de cambio automático al seleccionar un idioma
+    clearInterval(languageInterval);
+
+    // Remover el parpadeo
+    document.getElementById('mainHeading').classList.remove('parpadea');
+    document.getElementById('mainParagraph').classList.remove('parpadea');
+
+    // Actualizar el texto de la página principal
+    document.getElementById('mainHeading').innerHTML = `<em>${translation.mainHeading}</em>`;
+    document.getElementById('mainParagraph').innerHTML = `${translation.mainParagraph} <i class="fas fa-stopwatch"></i>`;
+
+    document.querySelector('#info h1').innerHTML = `<em>${translation.infoTitle}</em>`;
+    document.querySelector('#info p').textContent = translation.infoSubtitle;
+
+    // Actualizar los textos de las tarjetas
+    document.querySelectorAll('.card h3')[0].innerHTML = `<em>${translation.card1Title}</em>`;
+    document.querySelectorAll('.card p')[0].textContent = translation.card1Description;
+    document.querySelectorAll('.card h3')[1].innerHTML = `<em>${translation.card2Title}</em>`;
+    document.querySelectorAll('.card p')[1].textContent = translation.card2Description;
+    document.querySelectorAll('.card h3')[2].innerHTML = `<em>${translation.card3Title}</em>`;
+    document.querySelectorAll('.card p')[2].textContent = translation.card3Description;
+
+    // Actualizar los textos del formulario
+    document.querySelector('#registerForm h1').innerHTML = `<em>${translation.formTitle}</em>`;
+    document.querySelector('label[for="inputNombre"]').innerHTML = `<i class="mr-2 fas fa-user"></i>${translation.formName}`;
+    document.querySelector('label[for="inputCorreo"]').innerHTML = `<i class="mr-2 fas fa-envelope"></i>${translation.formEmail}`;
+    document.querySelector('label[for="inputCelular"]').innerHTML = `<i class="mr-2 fas fa-mobile-alt"></i>${translation.formPhone}`;
+    document.querySelector('label[for="inputCURP"]').innerHTML = `<i class="mr-2 fas fa-user-circle"></i>${translation.formCurp}`;
+    document.querySelector('label[for="inputRFC"]').innerHTML = `<i class="mr-2 fas fa-money-bill-alt"></i>${translation.formRfc}`;
+    document.querySelector('label[for="inputFechaNacimiento"]').innerHTML = `<i class="mr-2 fas fa-calendar-alt"></i>${translation.formDateOfBirth}`;
+    document.querySelector('label[for="inputDireccion"]').innerHTML = `<i class="mr-2 fas fa-map-marker-alt"></i>${translation.formAddress}`;
+    document.querySelector('label[for="inputPassword1"]').innerHTML = `<i class="mr-2 fas fa-lock"></i>${translation.formPassword1}`;
+    document.querySelector('label[for="inputPassword2"]').innerHTML = `<i class="mr-2 fas fa-lock"></i>${translation.formPassword2}`;
+    document.querySelector('label[for="inputFirma"]').innerHTML = `<i class="mr-2 fas fa-signature"></i>${translation.formSignature}`;
+    document.querySelector('label[for="inputFotoPerfil"]').innerHTML = `<i class="mr-2 fas fa-camera"></i>${translation.formProfilePicture}`;
+    document.querySelector('.form-check-label').innerHTML = translation.formTerms;
+
+    // Actualizar el texto del botón de idioma
+    document.getElementById('languageText').textContent = translation.languageButton;
+
+    // Actualizar el texto del botón de guardar
+    document.querySelector('button[type="submit"]').innerHTML = `<i class="fas fa-save mr-2"></i>${translation.formSaveButton}`;
+
+    // Actualizar los enlaces de navegación
+    document.querySelector('.nav-link.registro').innerHTML = `<i class="fas fa-user-plus" style="font-size: 15px;"></i> ${translation.registerLink}`;
+    document.querySelector('.nav-link.ingreso').innerHTML = `<i class="fas fa-user mr-2" style="font-size: 15px;"></i> ${translation.loginLink}`;
+
+    // Actualizar el pie de página
+    document.querySelector('footer .font-weight-bold').innerHTML = translation.footerText;
+
+}
+
+    </script>
+    
+    <script>
+    const translations = {
+        es: {
+        mainHeading: '¡Identificado siempre!',
+        mainParagraph: 'Innovando a cada segundo',
+        infoTitle: 'Sistema de identificación humana',
+        infoSubtitle: 'Ofrecemos soluciones en la gestión de identidades con un sistema de tres elementos principales:',
+        card1Title: 'Tarjeta Física y Digital',
+        card1Description: 'Ofrecemos una tarjeta que combina identidad física y digital.',
+        card2Title: 'Plataforma Integral',
+        card2Description: 'Nuestra plataforma integral gestiona todas tus identidades sociales.',
+        card3Title: 'Verificación de Códigos QR',
+        card3Description: 'Verifica y gestiona tus códigos de identidad de manera segura con QR codes.',
+        formTitle: 'Formulario de registro',
+        formName: 'Nombre Completo',
+        formEmail: 'Correo',
+        formPhone: 'Celular',
+        formCurp: 'CURP',
+        formRfc: 'RFC',
+        formDateOfBirth: 'Fecha de Nac.',
+        formAddress: 'Dirección de entrega',
+        formPassword1: 'Contraseña',
+        formPassword2: 'Confirmar Contraseña',
+        formSignature: 'Firma',
+        formProfilePicture: 'Foto de Perfil',
+        formSaveButton: 'Guardar',
+        formTerms: 'Acepto los <a href="#termsModal" data-toggle="modal" data-target="#termsModal">términos y condiciones</a>',
+        languageButton: 'Idioma',
+        registerLink: 'Regístrate',
+        loginLink: 'Ingresa',
+        footerText: '© 2024 Human Technology Identification.<br>Todos los derechos reservados.'
+    },
+    en: {
+        mainHeading: 'Always identified!',
+        mainParagraph: 'Innovating every second',
+        infoTitle: 'Human Identification System',
+        infoSubtitle: 'We offer identity management solutions with a three-element system:',
+        card1Title: 'Physical and Digital Card',
+        card1Description: 'We offer a card that combines physical and digital identity.',
+        card2Title: 'Comprehensive Platform',
+        card2Description: 'Our comprehensive platform manages all your social identities.',
+        card3Title: 'QR Code Verification',
+        card3Description: 'Verify and manage your identity codes securely with QR codes.',
+        formTitle: 'Registration Form',
+        formName: 'Full Name',
+        formEmail: 'Email',
+        formPhone: 'Phone',
+        formCurp: 'CURP',
+        formRfc: 'RFC',
+        formDateOfBirth: 'Date of Birth',
+        formAddress: 'Delivery Address',
+        formPassword1: 'Password',
+        formPassword2: 'Confirm Password',
+        formSignature: 'Signature',
+        formProfilePicture: 'Profile Picture',
+        formSaveButton: 'Save',
+        formTerms: 'I accept the <a href="#termsModal" data-toggle="modal" data-target="#termsModal">terms and conditions</a>',
+        languageButton: 'Language',
+        registerLink: 'Register',
+        loginLink: 'Login',
+        footerText: '© 2024 Human Technology Identification.<br> All rights reserved.'
+    },
+        // Añade el resto de idiomas (fr, it, zh, ru, de, pt, ar, ko) siguiendo el mismo patrón.
+    };
+    
+    </script>
+
+        <!-- Modal terminos y condiciones-->
+        <div id="termsModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="privacyModalLabel" style="text-align: center; width: 100%;"><strong>Aviso de Privacidad</strong></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: justify;">
+                        <p>El presente aviso de privacidad se celebra entre <strong>Human Technology Identification</strong>, mejor conocido como <strong>Human System</strong>, en lo sucesivo denominado "El Proveedor", y la contraparte en adelante denominado "El Usuario".</p>
+                        <p>A través de nuestra plataforma <a href="https://www.humansystem.mx" target="_blank">www.humansystem.mx</a>, usted puede acceder, rectificar, cancelar u oponerse al tratamiento de sus datos personales de forma inmediata en cualquier momento que usted desee. Estos derechos le permiten gestionar su información personal.</p>
+                        <h5 style="text-align: center;"><strong>1. Objeto del tratamiento:</strong></h5>
+                        <p>El Proveedor se compromete a ofrecer al Usuario un servicio que implica el tratamiento de sus datos personales con la siguiente finalidad:</p>
+                        <ul style="text-align: justify;">
+                            <li>Identificación física con validación digital mediante imágenes y datos contenidos en una tarjeta humana, un certificado de registro humano, y el requerido programa de cómputo.</li>
+                        </ul>
+                        <h5 style="text-align: center;"><strong>2. Verificación de Información:</strong></h5>
+                        <p>Para garantizar la autenticidad y seguridad de los datos proporcionados por el Usuario, utilizaremos servicios externos para la verificación del número de celular y del correo electrónico suministrado. Estos servicios permitirán confirmar que la información de contacto proporcionada es válida y pertenece al Usuario registrado, asegurando la integridad de nuestros procesos y la protección de la identidad del Usuario.</p>
+                        <h5 style="text-align: center;"><strong>3. Datos Almacenados:</strong></h5>
+                        <p>El Usuario autoriza al Proveedor a almacenar los siguientes datos personales, reconociendo que el servicio incluye la recopilación y tratamiento de dicha información:</p>
+                        <ul style="text-align: justify;">
+                            <li>Nombre, Correo electrónico, Teléfono celular, CURP, RFC, Domicilio, Firma autógrafa, Firma Digital, Fotografía de Rostro.</li>
+                        </ul>
+                        <h5 style="text-align: center;"><strong>4. Acceso y Rectificación:</strong></h5>
+                        <p>Para acceder a sus datos personales, necesitará proporcionar cualquier dato identificador asociado a su identidad que se almacenó durante el registro en nuestra página web, así como la contraseña encriptada que usted asignó. La rectificación de datos personales se podrá realizar a través de la sección de configuración.</p>
+                        <p>Para limitar el uso y divulgación de sus datos personales, ponemos a su disposición lo siguiente:</p>
+                        <ul style="text-align: justify;">
+                            <li>Un botón para ocultar sus datos personales en nuestra plataforma.</li>
+                        </ul>
+                        <h5 style="text-align: center;"><strong>5. Cancelación y Oposición:</strong></h5>
+                        <p>El Usuario puede cancelar el tratamiento de sus datos personales enviando el formulario correspondiente de forma vacía desde la sección de configuración, indicando que desea eliminar dicho dato. Además, puede oponerse al tratamiento de sus datos de manera definitiva eliminando su perfil en la sección correspondiente.</p>
+                        <p>De esta forma usted puede revocar el consentimiento que, en su caso, nos haya otorgado para el tratamiento de sus datos personales con solo presionar un botón. Sin embargo, es importante que tenga en cuenta que no en todos los casos podremos atender su solicitud o concluir el uso de forma inmediata, ya que es posible que por alguna obligación legal requiramos seguir tratando sus datos personales. Asimismo, usted deberá considerar que para ciertos fines, la revocación de su consentimiento implicará que no le podamos seguir prestando el servicio que nos solicitó, y la conclusión definitiva de su relación con nosotros.</p>
+                        <h5 style="text-align: center;"><strong>6. Consentimiento Expreso:</strong></h5>
+                        <p>Antes de utilizar el servicio, el Usuario deberá expresar su consentimiento para el uso de sus datos personales de acuerdo con las condiciones establecidas en este aviso de privacidad. Este consentimiento se otorgará mediante la firma autógrafa en el formulario de registro al momento de aceptar la casilla de términos y condiciones.</p>
+                        <h5 style="text-align: center;"><strong>7. Privacidad y Seguridad:</strong></h5>
+                        <p>El Proveedor garantiza la privacidad y seguridad de los datos almacenados. Se implementarán medidas de seguridad para proteger la información del Usuario contra accesos no autorizados o cualquier forma de procesamiento no permitida.</p>
+                        <h5 style="text-align: center;"><strong>8. Modificaciones:</strong></h5>
+                        <p>El Proveedor se reserva el derecho de realizar modificaciones en la plataforma para mejorar el servicio, siempre y cuando dichas modificaciones no afecten los datos personales del Usuario sin su consentimiento expreso.</p>
+                        <p>El actual aviso de privacidad puede sufrir modificaciones, cambios o actualizaciones derivadas de nuevos requerimientos legales; de nuestras propias necesidades por los productos o servicios que ofrecemos; de nuestras prácticas de privacidad; o por otras causas extraordinarias. Nos comprometemos a mantenerlo informado sobre los cambios o actualizaciones que pueda sufrir el presente aviso de privacidad, a través de comunicados visibles en la plataforma y notificaciones a su correo electrónico.</p>
+                    </div>                    
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal de Bootstrap para el pago -->
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="paymentModalLabel">Detalles de Pago</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Contenedor para el elemento de tarjeta de Stripe -->
+          <div id="card-element"></div>
+          <div id="card-errors" role="alert" style="color: red;"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="payButton">Pagar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+    <!-- Script de Bootstrap y librerías externas -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/croppie/croppie.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <!-- script video info -->
+    <script>
+        // Detectar si la URL contiene el hash del modal
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.location.hash === '#termsModal') {
+                $('#termsModal').modal('show');
+            }
+        });
+    </script>
+
+    
+    <script>
+        function showVideo(videoSrc) {
+            Swal.fire({
+                html: `<video width="100%" controls>
+                        <source src="https://storage.googleapis.com/humansystem/Claudia%20Genetics%20Directora%20Ejecutiva.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>`,
+                showCloseButton: true,
+                showConfirmButton: false
+            });
+        }
+    </script>
+    <script>
+        // Función que se ejecuta al cargar la página
+        window.onload = function() {
+            showGIFFirst();
+        };
+        function showGIFFirst() {
+            // Muestra el GIF al cargar la página
+            document.getElementById('gif').style.display = 'block';
+            document.getElementById('image').style.display = 'none';
+
+            // Después de 6 segundos, muestra la imagen y oculta el GIF
+            setTimeout(function() {
+                document.getElementById('gif').style.display = 'none';
+                document.getElementById('image').style.display = 'block';
+            }, 8000);
+        }
+        function restartGIF() {
+            // Muestra el GIF de nuevo cuando se hace clic en la imagen
+            document.getElementById('gif').style.display = 'block';
+            document.getElementById('image').style.display = 'none';
+
+            // Repite el ciclo después de 6 segundos
+            setTimeout(function() {
+                document.getElementById('gif').style.display = 'none';
+                document.getElementById('image').style.display = 'block';
+            }, 6000);
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inicializar Stripe.js con tu clave pública
+            const stripe = Stripe('pk_live_51NDWZRLrN3V7k2i5MnkBKAYTciMu7E1aE9EppkWRXuhlYsPLuDdqtwxucdRDYAdiDhVwHk0UGvuREq0n0W7q6t4z003mrXcTOX');
+            const elements = stripe.elements();
+            const cardElement = elements.create('card');
+            cardElement.mount('#card-element');
+            // Variables globales
+            let croppieInstance = null;
+            let formData = null; // Declarar formData como variable global
+            const inputFotoPerfil = document.getElementById('inputFotoPerfil');
+            const croppieContainer = document.getElementById('croppie-container');
+            const croppedImage64Input = document.getElementById('croppedImage64');
+            const croppedImagePreview = document.getElementById('cropped-image-preview');
+            const cameraButton = document.getElementById('cameraButton');
+            const cropButton = document.getElementById('cropButton');
+            const changeImageButton = document.getElementById('changeImageButton');
+            const credentialImagePreview = document.getElementById('credential-image-preview');
+            const firmaInput = document.getElementById('firmaInput');
+            const registerForm = document.getElementById('registerForm');
+            const documentImagePreview = document.getElementById('document-image-preview');
+            function base64ToBlob(base64) {
+                const base64Marker = 'data:image/png;base64,';
+                if (!base64 || !base64.startsWith(base64Marker)) {
+                    throw new Error('La cadena no está en formato base64 válido');
+                }
+    
+                const base64Data = base64.split(base64Marker)[1]; // Obtener solo los datos base64
+                const byteCharacters = atob(base64Data);
+                const byteNumbers = new Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+                const byteArray = new Uint8Array(byteNumbers);
+                return new Blob([byteArray], { type: 'image/png' });
+            }
+            // Cargar y previsualizar imagen de perfil
+            window.loadProfileImage = function (event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    if (croppieInstance) {
+                        croppieInstance.destroy();
+                    }
+                    croppieContainer.style.display = 'block';
+                    cameraButton.style.display = 'none';
+                    croppieInstance = new Croppie(croppieContainer, {
+                        url: event.target.result,
+                        viewport: { width: 250, height: 250, type: 'circle' },
+                        boundary: { width: 280, height: 280 },
+                        showZoomer: true
+                    });
+                    cropButton.style.display = 'inline-block';
+                }
+                reader.readAsDataURL(file);
+            };
+            // Recortar la imagen de perfil
+            window.cropProfileImage = function () {
+                croppieInstance.result({
+                    type: 'base64',
+                    size: 'viewport',
+                    format: 'png',
+                    quality: 1
+                }).then(function (base64) {
+                    try {
+                        if (!base64.startsWith('data:image/png;base64,')) {
+                            base64 = 'data:image/png;base64,' + base64;
+                        }
+                        // Asigna el valor base64 a un campo de entrada oculto para su uso posterior
+                        croppedImage64Input.value = base64;
+                        // Elimina el campo de archivo para que no se envíe
+                        inputFotoPerfil.remove();
+                        const fotoPerfilBlob = base64ToBlob(base64);
+                        const fotoPerfilFile = new File([fotoPerfilBlob], 'fotoPerfil.png', { type: 'image/png' });
+                        // Actualiza la vista previa
+                        croppedImagePreview.innerHTML = `<img src="${base64}" class="rounded-circle" width="150" height="150">`;
+                        credentialImagePreview.innerHTML = `<img src="${base64}" class="rounded-circle" width="130" height="130">`;
+                        // Actualiza la vista previa en el documento
+            document.getElementById('document-image-preview').innerHTML = `<img src="${base64}" class="rounded-circle" width="150" height="150">`;
+                        // Ocultar elementos no necesarios
+                        croppieContainer.style.display = 'none';
+                        cameraButton.style.display = 'none';
+                        cropButton.style.display = 'none';
+                        changeImageButton.style.display = 'inline-block';
+                        
+                    } catch (error) {
+                        console.error('Error al convertir base64 a Blob:', error.message);
+                        Swal.fire('Error', 'La imagen no se pudo procesar. Intenta de nuevo.', 'error');
+                    }
+                }).catch(function (error) {
+                    console.error('Error al recortar la imagen:', error);
+                    Swal.fire('Error', 'Hubo un problema al recortar la imagen. Por favor, inténtalo de nuevo.', 'error');
+                });
+            };
+            // Cambiar la imagen de perfil
+            window.changeImage = function () {
+                croppedImagePreview.innerHTML = '';
+                croppedImage64Input.value = '';
+                cameraButton.style.display = 'inline-block';
+                changeImageButton.style.display = 'none';
+                // Volver a agregar el campo de archivo para seleccionar una nueva imagen
+                const newInputFotoPerfil = document.createElement('input');
+                newInputFotoPerfil.type = 'file';
+                newInputFotoPerfil.id = 'inputFotoPerfil';
+                newInputFotoPerfil.name = 'fotoPerfil';
+                newInputFotoPerfil.className = 'custom-file-input';
+                newInputFotoPerfil.accept = 'image/*';
+                newInputFotoPerfil.style.display = 'none';
+                newInputFotoPerfil.onchange = loadProfileImage;
+                document.body.appendChild(newInputFotoPerfil);
+            };
+            // Configuración de SignaturePad
+            const canvas = document.querySelector('#signature-pad canvas');
+            const signaturePad = new SignaturePad(canvas);
+            const undoButton = document.getElementById('undo-signature');
+            const clearButton = document.getElementById('clear-signature');
+            const confirmButton = document.getElementById('confirm-signature');
+            // Deshacer la última línea de la firma
+            undoButton.addEventListener('click', function () {
+                const data = signaturePad.toData();
+                if (data) {
+                    data.pop();
+                    signaturePad.fromData(data);
+                }
+            });
+            // Limpiar el canvas de la firma
+            clearButton.addEventListener('click', function () {
+                signaturePad.clear();
+            });
+            // Confirmar la firma
+            confirmButton.addEventListener('click', function () {
+                if (!signaturePad.isEmpty()) {
+                    const dataURL = signaturePad.toDataURL();
+                    firmaInput.value = dataURL;
+                    document.getElementById('signature-preview').innerHTML = `<img src="${dataURL}" class="img-fluid">`;
+                    document.getElementById('signature-pad').classList.add('d-none');
+                    document.querySelector('.signature-buttons').classList.add('d-none');
+                } else {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Firma no confirmada',
+                        text: 'Primero debes dibujar tu firma para confirmarla.'
+                    });
+                }
+            });
+            // Función para imprimir los datos del FormData en la consola
+            function logFormData(formData) {
+                const obj = {};
+                formData.forEach((value, key) => {
+                    obj[key] = value;
+                });
+                console.log('FormData:', obj);
+            }
+            // Función para validar contraseñas
+            function validarContraseñas(contrasena1, contrasena2) {
+                if (contrasena1 !== contrasena2) {
+                    return { success: false, message: 'Las contraseñas no coinciden.' };
+                }
+                if (contrasena1.length < 8 || contrasena1.length > 20) {
+                    return { success: false, message: 'La contraseña debe tener entre 8 y 20 caracteres.' };
+                }
+                const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/;
+                if (!regex.test(contrasena1)) {
+                    return { success: false, message: 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número.' };
+                }
+                return { success: true };
+            }
+            // Función para verificar duplicados
+            async function verificarDuplicados(curp, rfc, correo, telefono) {
+                const response = await fetch('/verificarDuplicados', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ curp, rfc, correo, telefono })
+                });
+                const data = await response.json();
+                if (!data.success) {
+                    Swal.fire('Error', data.message, 'error');
+                    return false;
+                }
+                return true;
+            }
+            // Manejar el envío del formulario
+            registerForm.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                // Validar contraseñas antes de mostrar el loading
+                formData = new FormData(registerForm);
+                const contrasena1 = formData.get('contrasena1');
+                const contrasena2 = formData.get('contrasena2');
+                const resultadoValidacion = validarContraseñas(contrasena1, contrasena2);
+                if (!resultadoValidacion.success) {
+                    Swal.fire('Contraseña', resultadoValidacion.message, 'warning');
+                    return;
+                }
+                     // Verificar si la imagen de perfil ha sido recortada
+                     if (!croppedImage64Input.value) {
+        Swal.close(); // Cerrar la alerta de loading antes de mostrar la alerta de error
+        Swal.fire('Foto de Perfil', 'Debes seleccionar y confirmar una imagen de perfil antes de enviar el formulario.', 'info');
+        return;
+    }
+  // Añadir archivos de imágenes
+  const fotoPerfilBlob = base64ToBlob(croppedImage64Input.value);
+    formData.append('fotoPerfil', fotoPerfilBlob, 'fotoPerfil.png');
+      // Verificar si la firma digital está presente y confirmada
+      if (signaturePad.isEmpty() || !firmaInput.value) {
+        Swal.fire('Firma Digital', 'Debes dibujar y confirmar tu firma antes de enviar el formulario.', 'info');
+        return;
+    } else {
+        const firmaDigitalBlob = base64ToBlob(firmaInput.value);
+        formData.append('firmaDigital', firmaDigitalBlob, 'firmaDigital.png');
+    }
+                // Mostrar loading
+                Swal.fire({
+                    title: 'Validando datos...',
+                    text: 'Por favor espera mientras validamos la información del formulario.',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                // Verificar duplicados
+                const curp = formData.get('curp');
+                const rfc = formData.get('rfc');
+                const correo = formData.get('correo');
+                const telefono = formData.get('telefono');
+                if (!(await verificarDuplicados(curp, rfc, correo, telefono))) {
+                    return;
+                }
+                Swal.close(); // Cerrar la alerta de loading antes de mostrar la alerta de confirmación
+                // Mostrar pregunta de confirmación antes de abrir el modal de pago
+                Swal.fire({
+                    title: '¿Deseas registrar tus datos personales?',
+                    text: 'El costo es de 500 pesos.',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, registrar',
+                    cancelButtonText: 'No, cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Proceder con el registro
+                        $('#paymentModal').modal('show');
+                    } else {
+        Swal.fire({
+            title: 'Cancelado',
+            text: 'El registro de tus datos ha sido cancelado.',
+            icon: 'warning',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    }
+                });
+            });
+            // Configurar el botón de pago en el modal
+            document.getElementById('payButton').addEventListener('click', async function () {
+                Swal.fire({
+                    title: 'Procesando Pago...',
+                    text: 'Por favor espera mientras procesamos tu pago.',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                try {
+                    const { paymentMethod, error } = await stripe.createPaymentMethod({
+                        type: 'card',
+                        card: cardElement
+                    });
+                    if (error) {
+                        Swal.fire('Error', 'Error al crear el método de pago: ' + error.message, 'error');
+                        return;
+                    }
+                    const paymentResponse = await fetch('/procesarPago', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ paymentMethodId: paymentMethod.id })
+                    });
+                    const paymentData = await paymentResponse.json();
+                    if (!paymentData.success) {
+                        Swal.fire('Error', 'No se pudo procesar el pago: ' + paymentData.message, 'error');
+                        return;
+                    }
+                    Swal.fire({
+                        title: 'Registrando...',
+                        text: 'Por favor espera',
+                        imageUrl: 'https://www.boasnotas.com/img/loading2.gif',
+                        showConfirmButton: false,
+                        allowOutsideClick: false
+                    });
+                    const registerResponse = await fetch('/register', {
+                        method: 'POST',
+                        body: formData // Utilizar formData global
+                    });
+                    const registerData = await registerResponse.json();
+                    if (registerData.success) {
+                        Swal.fire({
+                            title: 'Registro Exitoso',
+                            text: registerData.message,
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar'
+                        }).then(() => window.location.href = '/');
+                    } else {
+                        Swal.fire({
+                            title: 'Error en Registro',
+                            text: registerData.message,
+                            icon: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error durante el proceso de registro y pago:', error);
+                    Swal.fire('Error', 'Hubo un problema al procesar tu solicitud. Inténtalo de nuevo.', 'error');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

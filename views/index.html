@@ -1,0 +1,2520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="icon" href="https://i.ibb.co/G3XDtMJ/Logoapp.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- Google Fonts -->    
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Iceland&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: "Iceland", sans-serif;
+        background-color: #f0f2f5;
+      }
+      .navbar {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 30px;
+        margin-top: 5px;
+        padding: 5px 15px;
+        color: #000000;
+        background-color: whitesmoke;
+      }
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+      }
+      .navbar-brand img {
+        height: 60px;
+      }
+      .navbar-toggler-icon {
+        margin-top: 1rem;
+        color: #000000;
+      }
+      .nav-item {
+        margin-left: 15px;
+      }
+      .nav-item .nav-link {
+        font-size: 18px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+      .nav-item .nav-link:hover {
+        background-color: #e3e3e3;
+        text-decoration: none;
+      }
+      .navbar-collapse .nav-item {
+        margin-bottom: 10px;
+      }
+      .navbar-collapse .nav-link span {
+        margin-left: 8px;
+      }
+      .navbar-collapse.show .nav-link span {
+        display: inline;
+      }
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        margin-left: 10px;
+      }
+      .switch input {
+        display: none;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: #1F4E67;
+      }
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+      .blurred {
+        filter: blur(5px);
+        transition: filter 0.3s ease;
+      }
+      .social-links-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .custom-btn {
+        border-radius: 30px;
+      }
+      .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .btn-group .btn {
+        margin: 0 5px;
+      }
+      .btn-group .btn:first-child {
+        margin-left: 0;
+      }
+      .btn-group .btn:last-child {
+        margin-right: 0;
+      }
+      .header-title, .section-title {
+        color: black;
+      }
+      .section-content {
+        margin-bottom: 10px;
+      }
+      .card-group, .wallet-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .card-group i, .wallet-group i {
+        margin-right: 10px;
+      }
+    </style>
+</head>
+<body>
+    <% if (login) { %> 
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top mx-2">
+        <a class="navbar-brand" href="#">
+            <img src="https://storage.googleapis.com/humansystem/simp-logo.png" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item mt-2">
+                    <a class="nav-link" id="perfilBtn">
+                        <span class="fas fa-user" style="color: #000000;"></span>
+                        <span style="color: #000000;">Perfil</span>
+                    </a>
+                </li>                
+                <li class="nav-item mt-2">
+                    <a class="nav-link" id="idCardIcon">
+                        <i class="fas fa-id-card" style="color: #000000;"></i>
+                        <span style="color: #000000;">ID Card</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-2">
+                    <a class="nav-link" id="certificadoBtn">
+                        <span class="fas fa-file-alt" style="color: #000000;"></span>
+                        <span style="color: #000000;">Certificado</span>
+                    </a>
+                </li>     
+                <li class="nav-item mt-2" >
+                    <a class="nav-link" id="configuracionBtn">
+                        <span class="fas fa-cog" style="color: #000000;"></span>
+                        <span style="color: #000000;">Configuración</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-2">
+                    <a class="nav-link" id="billeteraBtn">
+                        <span class="fas fa-wallet" style="color: #000000;"></span>
+                        <span style="color: #000000;">Billetera</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-2">
+                    <a class="nav-link" href="logout">
+                        <i class="fas fa-sign-out-alt" style="color: #000000;"></i>
+                        <span style="color: #000000;">Salir</span>
+                    </a>
+                </li>
+            </ul>
+        </div> 
+    </nav>
+    <!-- Contenido Principal -->
+    <div id="Home" class="p-3" style="background-color: #f0f2f5;">
+        <div  id="contenedorPrincipal" class="p-2" style="box-shadow: 4px 4px 8px 8px rgba(0, 0, 0, 0.1); background: linear-gradient(to bottom,  #1F4E67 ,  #d71d00);  border-radius: 30px; ">
+            <div class="row justify-content-center  align-items-start">
+                <!-- Información del Usuario -->
+                <div class="col-md-3 d-flex justify-content-center">
+                    <div id="seccionPerfil" class="hidden-section col p-3 col-md text-center sticky top" style="box-shadow: 4px 4px 8px 8px rgba(0, 0, 0, 0.1); background-color: white; border-radius: 20px;">
+                        <img id="perfilImg" class="mt-3" src="<%= fotoPerfilUrl %>" width="200" height="200" style="cursor: pointer;"> 
+                    <div> 
+                    <!-- Nombre -->
+                    <h2 class="mt-3 font-weight-bold" style="color:#15566a;"> <em>Nombre:</em></h2>
+                    <h4 style="color:RED"  id="nombreID"><%= nombre %></h4>
+                    <!-- Humano -->
+                    <h4 class="font-weight-bold" style="color:#15566a;"> <em>Humano:</em></h4>
+                    <h5 style="color:red"  id="humanoID" ><%= humanoID %> </h5>             
+                    <!-- Descripción y enlaces --> 
+                    <div class="col col-md mt-3 pt-2 text-white p-1 rounded-lg" style="background-color: whitesmoke; box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.13); ">
+                        <div ALIGN="left">
+                        <button class="btn btn-danger btn-sm"  id="btnModificarDescripcion" style="border-radius: 20%; padding: 3px; float: left; margin-right: 5px;" type="button"><i class="fas fa-user-edit"></i></button>                             
+                        <div>
+                        <h5 class="font-weight-bold" style="color:red"><em>Descripción:</em></h5>
+                        <p class="margin-left:20px" id="descripcionUsuario" style="color:black; margin-left:35px"><%= descripcion %></p>
+                    </div>                                   
+                    <!-- Botones de redes sociales -->               
+                    <div class="text-center">
+                    <div ALIGN="left">
+                        <button class="pl-1 pr-1 btn btn-info btn-sm" id="modificarRedesSociales" style="position: relative; bottom: 0px; right: 0px; border-radius: 50%; padding: 1px;" type="button"><i class="fas fa-link"></i></button>
+                    <div style="display: inline-block;">
+                        <h5 class="ml-1 font-weight-bold" style="color: blue;"><em>Enlaces:</em></h5>
+                    </div>
+                </div>
+                <div class="social-links-container">
+                    <a class="social-link" id="linkPersonal" href="<%= socialLinks.personal || '#' %>" rel="noopener noreferrer" style="color: #000000; font-size: 21px;" target="_blank" data-social="Página Personal" data-icon="fas fa-user">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a class="social-link" id="linkWhatsApp" href="<%= socialLinks.whatsapp || '#' %>" rel="noopener noreferrer" style="color: #000000; font-size: 21px;" target="_blank" data-social="WhatsApp" data-icon="fab fa-whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <!--
+                    <a class="social-link" id="linkTrabajo" href="<%= socialLinks.trabajo || '#' %>" rel="noopener noreferrer" style="color: #000000; font-size: 21px;" target="_blank" data-social="Trabajo" data-icon="fas fa-briefcase">
+                        <i class="fas fa-briefcase"></i>
+                    </a>
+                    -->
+                    <a class="social-link" id="linkInstagram" href="<%= socialLinks.instagram || '#' %>" rel="noopener noreferrer" style="color: #000000; font-size: 21px;" target="_blank" data-social="Instagram" data-icon="fab fa-instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="social-link" id="linkFacebook" href="<%= socialLinks.facebook || '#' %>" rel="noopener noreferrer" style="color: #000000; font-size: 21px;" target="_blank" data-social="Facebook" data-icon="fab fa-facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a class="social-link" id="linkYoutube" href="<%= socialLinks.youtube || '#' %>" rel="noopener noreferrer" style="color: #000000; font-size: 21px;" target="_blank" data-social="YouTube" data-icon="fab fa-youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a class="social-link" id="linkLinkedIn" href="<%= socialLinks.linkedin || '#' %>" rel="noopener noreferrer" style="color: #000000; font-size: 21px;" target="_blank" data-social="LinkedIn" data-icon="fab fa-linkedin">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a class="social-link" id="linkTwitter" href="<%= socialLinks.twitter || '#' %>" style="color: #000000; font-size: 21px;" target="_blank" data-social="Twitter" data-icon="fas fa-times">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <a class="social-link" id="linkTikTok" href="<%= socialLinks.tiktok || '#' %>" style="color: #000000; font-size: 21px;" target="_blank" data-social="TikTok" data-icon="fab fa-tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                  </div>
+                </div>  
+                </div>
+            </div>   
+        </div>       
+    </div> 
+</div>
+<!-- Inicio col-md-9 -->
+<div class="col-md-9">
+     <div id="seccionBilletera" class="hidden-section container-fluid p-4 text-center" style="background-color: #000000; border-radius: 30px; box-shadow: 4px 4px 8px 8px rgba(0, 0, 0, 0.1);">
+        <div class="row">
+          <div class="col-md-6 mb-2 ">
+            <div class=" mb-2 mt-2 pt-3 pb-2" style="color: #000000; border-radius: 30px; background-color: white; box-shadow: 4px 4px 8px 8px rgba(0, 0, 0, 0.1);">
+              <h3 id="balance"><em class="font-weight-bold" style="font-size: 50px;">500,000</em> <img src="https://i.ibb.co/mTdhWPn/2.png" alt="Imagen de moneda" style="width: 35px; height: 35px; margin-left: 10px; margin-bottom: 13px;"></h3>
+            </div>
+            <div class="mt-3 mb-3">
+              <button class="mt-2 btn btn-primary rounded-pill" id="monedasButton" type="button">
+                <i class="fas fa-coins mr-1"></i> Comprar
+              </button>
+              <button class="mt-2 btn btn-success rounded-pill" id="monedasretirar1" type="button">
+                <i class="fas fa-hand-holding-usd mr-1"></i> Retirar
+              </button>
+            </div>
+            <div class="mt-3 m-4 p-3 clearfix text-white" style="border-radius: 30px; background-color: rgba(255, 255, 255, 0.33); box-shadow: 4px 4px 8px 8px rgba(0, 0, 0, 0.1);">
+              <div class="list-group" id="lista-conversaciones" role="tablist" style="border-radius: 30px;">
+                <a class="list-group-item list-group-item-action active btn-outline-warning font-weight-bold" data-toggle="list" href="#pago-linea" role="tab"><em>Pago en línea</em></a>
+                <a class="list-group-item list-group-item-action btn-outline-warning font-weight-bold" data-toggle="list" href="#transaccion-cripto" role="tab">Transacción de criptomonedas</a>
+              </div>
+              <div class="mb-1 mt-3">
+                <div class="tab-content" id="contenido-conversaciones">
+                  <div class="tab-pane fade show active" id="pago-linea" role="tabpanel">
+                    <form action="procesar_pago_linea.php" method="POST">
+                      <div class="form-group">
+                        <i class="fas fa-id-card"></i>
+                        <label for="curp">Humano</label>
+                        <input class="form-control" id="curp" name="curp" required type="text"/>
+                      </div>
+                      <div class="form-group">
+                        <i class="fas fa-money-bill"></i>
+                        <label for="moneda">Moneda</label>
+                        <input class="form-control" id="moneda" name="moneda" required type="text"/>
+                      </div>
+                      <div class="form-group">
+                        <i class="fas fa-dollar-sign"></i>
+                        <label for="monto">Monto</label>
+                        <input class="form-control" id="amount" name="monto" placeholder="$ 1,280.50" required type="number" min="0" step="0.01"/>
+                      </div>
+                      <button class="btn btn-warning" onclick="sendHumanCoin()" type="submit"><i class="fas fa-credit-card mr-2"></i>Realizar pago en línea</button>
+                    </form>
+                  </div>
+                  <div class="tab-pane fade" id="transaccion-cripto" role="tabpanel">
+                    <form action="procesar_transaccion_cripto.php" method="POST">
+                      <div class="form-group">
+                        <i class="fas fa-id-card"></i>
+                        <label for="curp">Humano</label>
+                        <input class="form-control" id="curp" name="curp" required type="text"/>
+                      </div>
+                      <div class="form-group">
+                        <i class="fab fa-bitcoin"></i>
+                        <label for="criptomoneda">Criptomoneda</label>
+                        <input class="form-control" id="criptomoneda" name="criptomoneda" required type="text"/>
+                      </div>
+                      <div class="form-group">
+                        <i class="fas fa-dollar-sign"></i>
+                        <label for="monto">Monto</label>
+                        <input class="form-control" id="monto" name="monto" required type="number" min="0" step="0.00000001"/>
+                      </div>
+                      <div class="form-group">
+                        <i class="fas fa-arrow-up"></i>
+                        <label for="direccion_remitente">Dirección del remitente</label>
+                        <input class="form-control" id="direccion_remitente" name="direccion_remitente" required type="text"/>
+                      </div>
+                      <div class="form-group">
+                        <i class="fas fa-arrow-down"></i>
+                        <label for="direccion_destinatario">Dirección del destinatario</label>
+                        <input class="form-control" id="direccion_destinatario" name="direccion_destinatario" required type="text"/>
+                      </div>
+                      <button class="btn btn-warning" type="submit"><i class="fas fa-exchange-alt mr-2"></i>Realizar transacción de criptomonedas</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="col-md-6">
+            <div class=" p-4 clearfix" style="border-radius: 30px; background-color: rgba(255, 255, 255, 0.33); box-shadow: 4px 4px 8px 8px rgba(0, 0, 0, 0.1);">
+              Botones de filtro 
+              <div class="d-flex flex-wrap justify-content-center mb-3">
+                <button class="btn btn-dark rounded-pill mx-2" id="TicketTodos" onclick="filtrarTickets('todos')">
+                  <i class="fas fa-arrows-alt"></i>
+                </button>
+                <button class="btn btn-primary rounded-pill mx-2" id="TicketCompras" onclick="filtrarTickets('compra')">
+                  <i class="fas fa-coins mr-1"></i>
+                </button>
+                <button class="btn btn-success rounded-pill mx-2" id="TicketRetirar" onclick="filtrarTickets('retiro')">
+                  <i class="fas fa-hand-holding-usd mr-1"></i>
+                </button>
+                <button class="btn btn-warning rounded-pill mx-2" id="Tickettransferencia" onclick="filtrarTickets('transferencia')">
+                  <i class="fas fa-exchange-alt mr-1"></i>
+                </button>
+              </div>
+      
+            Barra de búsqueda 
+         <form action="#" class="mb-2 mt-3" method="GET">
+                <div class="input-group">
+                  <input class="form-control" placeholder="Buscar movimientos..." type="text" style="border-radius: 20px 0 0 20px;">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-dark" type="button"><i class="fas fa-search"></i></button>
+                  </div>
+                </div>
+              </form> 
+      
+               Lista de movimientos
+          <div class="list-group" id="lista-conversaciones" role="tablist"> 
+              
+                <a class="list-group-item list-group-item-action active btn-outline-warning" data-toggle="list" href="#ticket1" role="tab">
+                  <h6 class="font-weight-bold text-dark mb-0">Transferencia</h6>
+                  <p class="small mt-2">Descripción: Transferiste 100 <img src="https://i.ibb.co/K9yzQwS/2.png" alt="Imagen de moneda" style="width: 15px; height: 15px;"> a STGAME34F4TRF4.</p>
+                  <p class="small">Fecha: 27 de Abril de 2023<br>Hora: 10:00 AM<br>ID: CAMESE9V9E35N4</p>
+                </a>
+                <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="#ticket2" role="tab">
+                  <h6 class="font-weight-bold text-dark mb-0">Compra</h6>
+                  <p class="small mt-2">Descripción: Compraste por 200 <img src="https://i.ibb.co/K9yzQwS/2.png" alt="Imagen de moneda" style="width: 15px; height: 15px;">.</p>
+                  <p class="small">Fecha: 28 de Abril del 2023<br>Hora: 11:58 PM<br>ID: CAMEHGY64BT5</p>
+                </a>
+                <a class="list-group-item list-group-item-action btn-outline-success" data-toggle="list" href="#ticket3" role="tab">
+                  <h6 class="font-weight-bold text-dark mb-0">Retiro</h6>
+                  <p class="small mt-2">Descripción: Retiraste 500 <img src="https://i.ibb.co/K9yzQwS/2.png" alt="Imagen de moneda" style="width: 15px; height: 15px;">.</p>
+                  <p class="small">Fecha: 1 de Mayo del 2023<br>Hora: 09:00 AM<br>ID: CAMESEUJ6JF8K</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    <!-- Configuración de Datos Personales -->
+    <div  id="seccionConfiguracion" class="hidden-section pl-5 pr-5 pt-4 pb-2 text-center" style="box-shadow: 4px 4px 8px 8px rgba(0, 0, 0, 0.1); background-color: white; border-radius: 30px;">
+        <div class="pb-3">
+        <h1 class=" header-title font-weight-bold"><em>Configuración </em><i class="ml-3 fas fa-cogs" style="font-size: 30px;"></i></h1>
+        <span class="">En esta sección usted puede rectificar sus datos personales.</span>
+        </div>
+        <div class="form-row">
+        <!-- Configuración de teléfono -->
+        <div class="form-group col-md-6" style="color: black;">
+        <i class="fas fa-mobile-alt"></i>
+        <label class="font-weight-bold" for="telefono">Celular:</label>
+        <label for="telefono" id="telefonoLabel"><%= telefono %></label>
+        <div class="input-group">
+        <input class="form-control" id="telefono" placeholder="Nuevo teléfono ..." style="border-radius: 30px;" 
+        type="text" pattern="[0-9]{10}" title="El teléfono debe tener exactamente 10 dígitos." 
+        minlength="10" maxlength="10" required />
+        <div class="input-group-append">
+        <button class="btn btn-primary" style="border-radius: 30px; background-color: #1F4E67;" type="button" onclick="enviarCodigo()">
+        <i class="fas fa-phone fa-1x"></i>
+        </button>
+        </div>
+    </div>
+    <!-- Campo para ingresar el código de verificación -->
+    <div class="form-group mt-3" id="verificacionContainer" style="display: none;">
+        <input class="form-control" id="codigo" placeholder="Ingrese el código de verificación ..." style="border-radius: 30px;" 
+               type="text" pattern="[0-9]{5}" title="Código de 6 dígitos" maxlength="6" required />
+        <button class="btn btn-primary mt-2" style="border-radius: 30px;" type="button" onclick="verificarCodigo()">
+            Verificar Código
+        </button>
+    </div>
+</div>
+
+<!-- Configuración de correo -->
+<div class="form-group col-md-6" style="color: black;">
+    <i class="fas fa-envelope"></i>
+    <label class="font-weight-bold" for="correo">Correo:</label>
+    <label for="correo" id="correoLabel"><%= correo %></label>
+    <div class="input-group">
+        <input class="form-control" type="email" id="correo" placeholder="Nuevo correo ..." style="border-radius: 30px;" required  oninput="this.value = this.value.toUpperCase()"/>
+        <div class="input-group-append">
+            <button class="btn btn-primary" style="border-radius: 30px; background-color: #1F4E67;" type="button" onclick="modificarCorreo()" >
+                <i class="fas fa-envelope fa-1x"></i>
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+    <!-- Configuración de dirección -->
+    <div class="form-group" style="color: black;">
+        <i class="fas fa-home"></i>
+        <label class="font-weight-bold" for="direccion">Dirección:</label>
+        <label for="direccion" id="direccionLabel"><%= direccion %></label>
+        <div class="input-group custom-search">
+            <input class="form-control custom-input" id="direccion" placeholder="Nueva dirección ..." style="border-radius: 30px;" type="text"  />
+      <div class="input-group-append custom-append">
+                <button class="btn btn-primary custom-btn" style="border-radius: 30px; background-color: #1F4E67;" type="button" onclick="modificarDireccion()">
+                    <i class="fas fa-home fa-1x"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Configuración de contraseña -->
+    <div class="form-row">
+        <div class="form-group col-md-4" style="color: black;">
+            <i class="fas fa-key"></i>
+            <label for="contrasena-actual" class="font-weight-bold">Contraseña actual:</label>
+            <div class="input-group">
+                <input class="form-control" id="contrasena-actual" placeholder="Contraseña actual ..." style="border-radius: 30px;" type="password" required />
+            </div>
+        </div>
+        <div class="form-group col-md-4" style="color: black;">
+            <i class="fas fa-key"></i>
+            <label for="nueva-contrasena" class="font-weight-bold">Nueva contraseña:</label>
+            <div class="input-group">
+                <input class="form-control" id="nueva-contrasena" placeholder="Nueva contraseña ..." style="border-radius: 30px;" type="password" required />
+            </div>
+        </div>
+        <div class="form-group col-md-4" style="color: black;">
+            <i class="fas fa-key"></i>
+            <label for="confirmar-contrasena" class="font-weight-bold ">Confirmar nueva contraseña:</label>
+            <div class="input-group">
+                <input class="form-control" id="confirmar-contrasena" placeholder="Confirmar nueva contraseña ..." style="border-radius: 30px;" type="password" required />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" style="border-radius: 30px; background-color: #1F4E67;" type="button" onclick="modificarContrasena()">
+                        <i class="fas fa-check fa-1x"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!-- Sección comprar tarjeta -->
+<div class="container mt-1">
+    <div class="row section-content  align-items-center justify-content-center">
+        <!-- Primera columna: Botón Mostrar/Ocultar Información -->
+        <div class="mt-4 mb-4 col-md-6 d-flex align-items-center justify-content-center">
+            <div class=" d-flex flex-column align-items-center justify-content-center" >
+                <label class="font-weight-bold text-center mb-3" for="toggleSwitch">Mostrar/Ocultar Información:</label>
+                <label class="switch">
+                    <input type="checkbox" id="toggleSwitch" onclick="toggleBlur()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <!-- Segunda columna: Botón Comprar Nueva Tarjeta -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <div class="d-flex flex-column align-items-center">
+                <h5 class="font-weight-bold text-center">Comprar nueva tarjeta</h5>
+                <button class="btn btn-primary custom-btn mb-3" style="border-radius: 5px; background-color: #1F4E67;" type="button" onclick="comprarNuevaTarjeta()">
+                    <i class="fas fa-id-card-alt fa-1x"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+   <!-- Sección de eliminar perfil -->
+<div class="form-group text-center p-4" style="background-color: #fcc404; border-radius: 30px;">
+    <div class="row">
+        <!-- Columna de Eliminar Perfil -->
+        <div class="col-md-12 d-flex align-items-center justify-content-center">
+            <div class="text-center">
+                <h4 class="mb-2 font-weight-bold" style="color: black;">
+                    <i class="fas fa-trash mr-2" style="font-size: 20px;"></i>
+                    <em>Eliminar perfil</em>
+                </h4>
+                <p class="mb-3">Eliminará sus datos personales y su tarjeta será desactivada.</p>
+                <button class="btn btn-danger p-2" style="border-radius: 10px; width: 150px;" type="button" onclick="eliminarPerfil()">
+                    <i class="fas fa-trash" style="font-size: 15px;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Añade un contenedor para el loading -->
+<div id="loading" style="display: none;">Cargando...</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.hidden-section');
+        const perfilLi = document.querySelector('li.nav-item #perfilBtn').parentElement;
+        const configuracionBtn = document.querySelector('li.nav-item #configuracionBtn').parentElement;
+        const loading = document.getElementById('loading');
+
+        let activeSection = 'seccionPerfil'; // Estado de la sección activa
+
+        // Detecta si la pantalla es grande o pequeña
+        function checkScreenSize() {
+            return window.matchMedia("(min-width: 768px)").matches;
+        }
+
+        // Función para manejar la visibilidad inicial de las secciones
+        function handleInitialVisibility() {
+            loading.style.display = 'block'; // Muestra el loading
+            const isLargeScreen = checkScreenSize();
+            if (isLargeScreen) {
+                showSection(['seccionPerfil', 'seccionConfiguracion']);
+                perfilLi.style.display = 'none';
+                configuracionBtn.style.display = 'none';  
+            } else {
+                showSection([activeSection]);
+                perfilLi.style.display = 'block'; 
+            }
+            loading.style.display = 'none'; // Oculta el loading
+        }
+
+        // Función para mostrar la sección correspondiente
+        function showSection(sectionIds) {
+            sections.forEach((section) => {
+                section.style.display = 'none'; // Oculta todas las secciones
+            });
+            sectionIds.forEach((id) => {
+                const activeSection = document.querySelector(`#${id}`);
+                if (activeSection) {
+                    activeSection.style.display = 'block'; // Muestra la sección activa
+                }
+            });
+        }
+
+        // Añadir evento de clic a cada enlace de navegación
+        navLinks.forEach((link) => {
+            link.addEventListener('click', function () {
+                const target = this.getAttribute('id');
+                const isLargeScreen = checkScreenSize();
+                
+                // Cambiar la sección activa según el botón
+                if (isLargeScreen) {
+                    if (target === 'billeteraBtn') {
+                        activeSection = 'seccionBilletera';
+                        showSection(['seccionPerfil', 'seccionBilletera']);
+                    } else if (target === 'configuracionBtn') {
+                        activeSection = 'seccionConfiguracion';
+                        showSection(['seccionPerfil', 'seccionConfiguracion']);
+                    }
+                } else {
+                    if (target === 'perfilBtn') {
+                        activeSection = 'seccionPerfil';
+                    } else if (target === 'billeteraBtn') {
+                        activeSection = 'seccionBilletera';
+                    } else if (target === 'configuracionBtn') {
+                        activeSection = 'seccionConfiguracion';
+                    }
+                    showSection([activeSection]);
+                }
+            });
+        });
+
+        // Maneja la visibilidad inicial al cargar la página
+        handleInitialVisibility();
+
+        // Detecta el cambio de tamaño de pantalla
+        window.addEventListener('resize', handleInitialVisibility);
+    });
+</script>
+
+    <!-- Script para mostrar SweetAlert2 con credencial humana -->
+    <!-- Imágenes de la tarjeta y del humano -->
+    <img id="imagenOriginal1" src="https://i.postimg.cc/j5H7wxZW/image.png" style="display: none;">
+    <img id="imagenFrente1" src="<%= fotoPerfilUrl %>" style="display: none;"> 
+    <script>
+    // Obtener las imágenes y el ID del usuario
+    const imagenOriginal = document.getElementById('imagenOriginal1').src;
+    const imagenFrente = document.getElementById('imagenFrente1').src;
+    const humanoID = '<%= humanoID %>';
+
+    // Función para mostrar SweetAlert2 con carga
+    function mostrarSweetAlert() {
+        // Mostrar SweetAlert2 de carga
+        Swal.fire({
+            title: 'Cargando tarjeta <i class="fas fa-id-card ml-2"></i>',
+            text: 'Por favor, espera mientras encontramos tu tarjeta.',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            didOpen: () => {
+                Swal.showLoading(); // Mostrar animación de carga
+            }
+        });
+
+        // Realizar la verificación del estado de la tarjeta
+        fetch('/verificarEstado', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ humanoID })
+        })
+        .then(response => response.json())
+        .then(data => {
+            Swal.close(); // Cerrar la alerta de carga al recibir respuesta
+
+            if (data.estado === 'inactivo') {
+                // La tarjeta ya está reportada como inactiva
+                return Swal.fire({
+                    title: '<i class="fas fa-exclamation-triangle mr-2"></i>Tarjeta inactiva ',
+                    text: 'Lo sentimos, esta tarjeta ya se reportó como perdida.',
+                    icon: 'warning',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            } else {
+                // Mostrar las imágenes y la opción de reportar la tarjeta
+                const imagenContainer = document.createElement("div");
+                imagenContainer.style.width = "100%";
+                imagenContainer.style.position = "relative";
+                imagenContainer.style.maxWidth = "350px";
+                imagenContainer.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.2)";
+                imagenContainer.style.borderRadius = "13px";
+                imagenContainer.style.overflow = "hidden";
+                imagenContainer.style.border = "1px solid #ccc";
+                imagenContainer.style.margin = "0 auto"; 
+                imagenContainer.style.backgroundColor = "#fff";
+
+                const imagenOriginalElem = document.createElement("img");
+                imagenOriginalElem.src = imagenOriginal;
+                imagenOriginalElem.style.width = "100%";
+                imagenOriginalElem.style.height = "auto";
+                imagenOriginalElem.style.objectFit = "cover";
+
+                const imagenFrenteElem = document.createElement("img");
+                imagenFrenteElem.src = imagenFrente;
+                imagenFrenteElem.style.width = "35%";
+                imagenFrenteElem.style.height = "auto";
+                imagenFrenteElem.style.borderRadius = "50%";
+                imagenFrenteElem.style.position = "absolute";
+                imagenFrenteElem.style.top = "60%";
+                imagenFrenteElem.style.left = "50%";
+                imagenFrenteElem.style.transform = "translate(-50%, -50%)";
+                imagenFrenteElem.style.border = "2px solid #fff";
+
+                imagenContainer.appendChild(imagenOriginalElem);
+                imagenContainer.appendChild(imagenFrenteElem);
+
+                // Mostrar SweetAlert2 con la imagen y la opción de reportar
+                Swal.fire({
+                    html: imagenContainer.outerHTML,
+                    showCloseButton: true,
+                    confirmButtonText: '<i class="fas fa-exclamation-triangle"></i>',
+                    confirmButtonColor: "#d33",
+                    customClass: {
+                        popup: 'animated tada'
+                    },
+                    preConfirm: () => {
+                        // Confirmar reporte de tarjeta como perdida
+                        return Swal.fire({
+                            title: '¿Deseas reportar la tarjeta como perdida?',
+                            text: 'Si reportas tu tarjeta como perdida, deberás pagar por su reposición.',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonText: 'Sí, reportar',
+                            cancelButtonText: 'Cancelar',
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#1F4E67'
+                        }).then(result => {
+                            if (result.isConfirmed) {
+                                // Mostrar SweetAlert2 de carga mientras se procesa el reporte
+                                Swal.fire({
+                                    title: 'Reportando...',
+                                    text: 'Por favor, espera mientras reportamos tu tarjeta como perdida.',
+                                    allowOutsideClick: false,
+                                    allowEscapeKey: false,
+                                    didOpen: () => {
+                                        Swal.showLoading();
+                                    }
+                                });
+
+                                // Enviar solicitud para actualizar el estado de la tarjeta
+                                return fetch('/actualizarEstado', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ humanoID })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    Swal.close(); // Cerrar la alerta de carga una vez completado
+
+                                    if (data.estado === 'inactivo') {
+                                        return Swal.fire({
+                                            title: '<i class="fas fa-info-circle mr-2"></i>Tarjeta reportada',
+                                            text: 'Tu tarjeta ha sido reportada como perdida.',
+                                            icon: 'info',
+                                            showConfirmButton: false,
+                                            timer: 2000
+                                        });
+                                    } else {
+                                        return Swal.fire({
+                                            title: 'Error',
+                                            text: data.message,
+                                            icon: 'error',
+                                            showConfirmButton: false,
+                                            timer: 2000
+                                        });
+                                    }
+                                })
+                                .catch(error => {
+                                    Swal.close(); // Cerrar la alerta de carga en caso de error
+                                    console.error('Error al enviar la solicitud:', error);
+                                    return Swal.fire({
+                                        title: 'Error',
+                                        text: 'No se pudo completar la operación.',
+                                        icon: 'error',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    });
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error al verificar el estado:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'No se pudo verificar el estado de la tarjeta.',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        });
+    }
+    // Añadir evento de clic al icono de la tarjeta
+    document.getElementById('idCardIcon').addEventListener('click', mostrarSweetAlert);
+</script>
+
+<!-- Script para mostrar SweetAlert2 con certificado humano -->
+<script>
+    document.getElementById('certificadoBtn').addEventListener('click', async function () {
+        try {
+            // Mostrar SweetAlert2 de "Cargando..."
+            Swal.fire({
+                title: 'Cargando certificado <i class="fas fa-file-alt ml-2"></i>',
+                text: 'Por favor, espera mientras encontramos tu certificado.',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => Swal.showLoading()
+            });
+
+            // Función para cargar imágenes de forma asíncrona
+            const loadImage = (src) => new Promise((resolve, reject) => {
+                if (!src) {
+                    reject(new Error('URL de imagen no válida'));
+                    return;
+                }
+                const img = new Image();
+                img.src = src;
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error(`Error al cargar la imagen: ${src}`));
+            });
+
+            // URLs de las imágenes
+            const backgroundImgSrc = "https://i.postimg.cc/c1VCCyMB/Certificado-1.png";
+            const perfilImgSrc = "<%= fotoPerfilUrl %>";
+            const qrCodeImgSrc = "<%= qrCodeHumano %>";
+
+            // Cargar todas las imágenes en paralelo
+            const [backgroundImg, perfilImg, qrCodeImg] = await Promise.all([
+                loadImage(backgroundImgSrc),
+                loadImage(perfilImgSrc),
+                loadImage(qrCodeImgSrc)
+            ]);
+
+            // Cerrar SweetAlert de "Cargando..."
+            Swal.close();
+
+            // Mostrar SweetAlert2 principal con las imágenes cargadas
+            Swal.fire({
+                showCloseButton: true,
+                showConfirmButton: false,
+                html: `
+                    <div id="imagesContainer" style="position: relative; width: 100%; max-width: 600px; margin: 0 auto;">
+                        <img src="${backgroundImgSrc}" style="display: block; width: 100%;">
+                        <img src="${perfilImgSrc}" class="rounded-lg" style="position: absolute; top: 18%; left: 50%; transform: translateX(-50%); width: 45%; height: auto; max-width: 45%; z-index: 1;">
+                        <img src="${qrCodeImgSrc}" class="rounded-lg" style="position: absolute; top: 60%; left: 50%; transform: translateX(-50%); width: 35%; height: auto; max-width: 35%; z-index: 1;">
+                    </div>
+                    <button id="downloadPdfBtn1" class="btn btn-primary mt-3" style="display: block; margin: 0 auto; background-color: #1F4E67; border-color: #1F4E67;">
+                        <i class="fas fa-file-download mr-1"></i> PDF
+                    </button>
+                `
+            });
+
+            // Agregar evento al botón de descarga de PDF
+            document.getElementById('downloadPdfBtn1').addEventListener('click', async function () {
+                try {
+                    // Mostrar confirmación antes de proceder con la descarga
+                    const result = await Swal.fire({
+                        title: 'Descargar certificado humano',
+                        text: '¿Estás seguro de que quieres descargar el documento PDF?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'Sí, descargar',
+                        cancelButtonText: 'No, cancelar',
+                        confirmButtonColor: '#1F4E67',
+                        cancelButtonColor: '#d33'
+                    });
+
+                    if (result.isConfirmed) {
+                        const { jsPDF } = window.jspdf;
+                        const doc = new jsPDF('p', 'mm', 'a4');
+                        const imgWidth = 210;
+                        const pageHeight = 297;
+                        const perfilWidth = 90;
+                        const perfilHeight = 90;
+                        const qrWidth = 70;
+                        const qrHeight = 70;
+
+                        // Añadir las imágenes al PDF
+                        doc.addImage(backgroundImg, 'JPEG', 0, 0, imgWidth, pageHeight);
+                        doc.addImage(perfilImg, 'JPEG', (imgWidth - perfilWidth) / 2, 55, perfilWidth, perfilHeight);
+                        doc.addImage(qrCodeImg, 'JPEG', (imgWidth - qrWidth) / 2, 180, qrWidth, qrHeight);
+
+                        // Descargar el PDF
+                        doc.save('<%= humanoID %>.pdf');
+                        Swal.fire({
+                            title: '¡Éxito!',
+                            text: 'El PDF se ha descargado correctamente.',
+                            icon: 'success',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error al generar el PDF:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Hubo un problema al generar el PDF. Por favor, intenta nuevamente.',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                }
+            });
+        } catch (error) {
+            console.error('Error al cargar las imágenes:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudieron cargar las imágenes. Por favor, intenta nuevamente.',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+    });
+</script>
+
+    <!-- Script para intercambiar imagen de perfil con QR -->
+    <script>
+        // Variables para almacenar las imágenes
+        var perfilImg = document.getElementById('perfilImg');
+        var fotoPerfilUrl = '<%= fotoPerfilUrl %>';
+        var qrCodeUrl = '<%= qrCodeTarjeta %>';
+        var isPerfil = true; // Inicialmente la imagen mostrada es la de perfil
+        var tarjetaActivada = false; // Variable para saber si la tarjeta ya fue activada
+    
+        // Manejar el clic en la imagen de perfil
+        perfilImg.addEventListener('click', function() {
+            if (tarjetaActivada) {
+                // Si la tarjeta ya está activada, solo alternar entre QR y perfil sin validar
+                if (isPerfil) {
+                    perfilImg.src = qrCodeUrl; // Cambiar a la imagen QR
+                } else {
+                    perfilImg.src = fotoPerfilUrl; // Cambiar a la imagen de perfil
+                }
+                isPerfil = !isPerfil; // Alternar entre true y false
+            } else {
+                // Si la tarjeta aún no ha sido activada, verificar el estado
+                Swal.fire({
+                    title: 'Verificando QR de tarjeta...',
+                    text: 'Por favor, espera mientras verificamos el estado QR de tu tarjeta.',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+    
+                // Verificar el estado de la tarjeta
+                fetch('/verificarEstado', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ humanoID })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    Swal.close(); // Cerrar el SweetAlert2 de carga
+        
+                    if (data.estado === 'comprado') {
+                        // Mostrar SweetAlert2 si la tarjeta aún no está activada
+                        Swal.fire({
+                            title: 'Tarjeta comprada',
+                            text: 'Debes activar tu tarjeta primero antes de ver el QR.',
+                            icon: 'info',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#1F4E67',
+                        });
+                              
+                    } else if (data.estado === 'inactivo') {
+                        Swal.fire({
+                            title: 'Tarjeta inactiva',
+                            text: 'Debes comprar una nueva tarjeta antes de ver el QR.',
+                            icon: 'info',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#1F4E67',
+                        });
+                           
+                    } else if (data.estado === 'activado') {
+                        // Tarjeta activada, cambiar a la imagen QR
+                        tarjetaActivada = true; // Marcar que la tarjeta ya está activada
+                        perfilImg.src = qrCodeUrl; // Cambiar a la imagen QR
+                        isPerfil = false; // Ahora la imagen mostrada es el QR
+                    } else {
+                        // Manejo de otros estados, si es necesario
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Estado de tarjeta desconocido.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al verificar el estado de la tarjeta:', error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Ocurrió un error al verificar el estado de la tarjeta.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            }
+        });
+    </script>
+    
+  <!-- Script para modificar la descripción -->
+<script>
+    if (document.getElementById('btnModificarDescripcion')) {
+        document.getElementById('btnModificarDescripcion').addEventListener('click', function() {
+            Swal.fire({
+                title: '<i class="fas fa-user-edit ml-2"></i> Modificar descripción',
+                html:
+                    '<textarea id="descripcionInput" class="swal2-textarea" maxlength="50" style="width: 100%;"></textarea>' +
+                    '<div style="text-align: right; font-size: 12px; color: gray;">' +
+                    '<span id="contadorCaracteres">0</span>/50 caracteres' +
+                    '</div>',
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#1F4E67',
+                cancelButtonColor: '#d33',
+                didOpen: () => {
+                    const descripcionInput = document.getElementById('descripcionInput');
+                    const contadorCaracteres = document.getElementById('contadorCaracteres');
+                    descripcionInput.value = document.getElementById('descripcionUsuario').textContent;
+
+                    // Actualizar el contador de caracteres al cargar
+                    contadorCaracteres.textContent = descripcionInput.value.length;
+
+                    // Evento para actualizar el contador de caracteres mientras el usuario escribe
+                    descripcionInput.addEventListener('input', function () {
+                        contadorCaracteres.textContent = descripcionInput.value.length;
+                    });
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let nuevaDescripcion = document.getElementById('descripcionInput').value;
+                    let descripcionActual = document.getElementById('descripcionUsuario').textContent;
+
+                    // Verifica si la nueva descripción es igual a la actual
+                    if (nuevaDescripcion === descripcionActual) {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Sin cambios',
+                            text: 'La descripción es la misma.',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        return; // Detener si no hay cambios
+                    }
+
+                    // Mostrar SweetAlert2 de carga mientras se modifica la descripción
+                    Swal.fire({
+                        title: 'Modificando...',
+                        text: 'Por favor, espera mientras actualizamos tu descripción.',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    // Realiza la solicitud AJAX solo si la descripción es diferente
+                    jQuery.ajax({
+                        type: 'POST',
+                        url: '/updateDescripcion',
+                        data: { descripcion: nuevaDescripcion },
+                        success: function(response) {
+                            Swal.close(); // Cerrar la alerta de carga al recibir respuesta
+
+                            if (response.success) {
+                                document.getElementById('descripcionUsuario').textContent = nuevaDescripcion;
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: '¡Guardado!',
+                                    text: 'La descripción ha sido modificada.',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'No se pudo actualizar la descripción.',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                });
+                            }
+                        },
+                        error: function() {
+                            Swal.close(); // Cerrar la alerta de carga en caso de error
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Hubo un error en el servidor.',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    }
+</script>
+
+<!-- Script para modificar enlaces de redes sociales -->
+<script>
+    document.getElementById('modificarRedesSociales').addEventListener('click', function() {
+        const htmlOptions = `
+            <select id="selectRedSocial" class="swal2-input">
+                <option value="personal" data-icon="fas fa-user">Página Personal</option>
+                <option value="whatsapp" data-icon="fab fa-whatsapp">WhatsApp</option>
+                <option value="instagram" data-icon="fab fa-instagram">Instagram</option>
+                <option value="facebook" data-icon="fab fa-facebook">Facebook</option>
+                <option value="youtube" data-icon="fab fa-youtube">YouTube</option>
+                <option value="linkedin" data-icon="fab fa-linkedin">LinkedIn</option>
+                <option value="twitter" data-icon="fab fa-twitter">Twitter</option>
+                <option value="tiktok" data-icon="fab fa-tiktok">TikTok</option>
+            </select>
+        `;
+    
+        Swal.fire({
+            title: '<i class="mr-2 fas fa-link"></i>Modificar Enlaces',
+            html: htmlOptions,
+            confirmButtonColor: '#1F4E67',
+            showCloseButton: true,
+            preConfirm: () => {
+                const selectElement = document.getElementById('selectRedSocial');
+                const selectedValue = selectElement.value;
+                if (!selectedValue) {
+                    Swal.showValidationMessage('Debes seleccionar una opción');
+                    return false;
+                }
+                const iconClass = selectElement.options[selectElement.selectedIndex].getAttribute('data-icon');
+                return { selectedValue, iconClass };
+            }
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                const { selectedValue: seleccion, iconClass } = result.value;
+                const baseUrls = {
+                    'personal': '',
+                    'whatsapp': 'https://wa.me/',
+                    'instagram': 'https://www.instagram.com/',
+                    'facebook': 'https://www.facebook.com/',
+                    'youtube': 'https://www.youtube.com/',
+                    'linkedin': 'https://www.linkedin.com/',
+                    'twitter': 'https://www.twitter.com/',
+                    'tiktok': 'https://www.tiktok.com/@'
+                };
+    
+                const baseUrl = baseUrls[seleccion];
+                let swalInputPlaceholder = '';
+                let swalTitle = '';
+    
+                if (seleccion === 'personal') {
+                    swalTitle = `Ingresa el URL de tu página personal`;
+                    swalInputPlaceholder = `URL completa (ej. https://www.tusitio.com)`;
+                } else if (seleccion === 'whatsapp') {
+                    swalTitle = 'Ingresa tu número de WhatsApp';
+                    swalInputPlaceholder = 'Número de teléfono en formato internacional (ej. 5212345678901)';
+                } else {
+                    swalTitle = `Ingresa tu nombre de usuario para ${seleccion}`;
+                    swalInputPlaceholder = `Nombre de usuario`;
+                }
+
+                // Mostrar el prompt para ingresar el enlace o usuario
+                Swal.fire({
+                    title: `${swalTitle} <i class="${iconClass} ml-2"></i>`,
+                    input: 'text',
+                    inputPlaceholder: swalInputPlaceholder,
+                    confirmButtonColor: '#1F4E67',
+                    cancelButtonColor: '#d33',
+                    showCancelButton: true,
+                }).then((inputResult) => {
+                    if (inputResult.isConfirmed) {
+                        let inputValue = inputResult.value.trim();
+                        // Verificar si el campo está vacío para eliminar o si se actualiza el enlace
+                        if (!inputValue) {
+                            // Verificar si el enlace ya ha sido eliminado
+                            fetch('/updateSocialLinks', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    socialLinks: { [seleccion]: '' }, // Comprobar si ya está eliminado
+                                    contrasena: null
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.alreadyDeletedLinks) {
+                                    // Mostrar mensaje si el enlace ya estaba eliminado
+                                    Swal.fire({
+                                        icon: 'info',
+                                        title: 'Sin cambios',
+                                        text: `El enlace ${seleccion} no ha sido configurado.`,
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    });
+                                } else {
+                                    // Proceder con la eliminación
+                                    Swal.fire({
+                                        title: `Eliminar enlace de ${seleccion}`,
+                                        text: '¿Estás seguro de que deseas eliminar este enlace?',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Sí, eliminar',
+                                        cancelButtonText: 'No',
+                                        confirmButtonColor: '#d33',
+                                        cancelButtonColor: '#1F4E67',
+                                    }).then((confirmResult) => {
+                                        if (confirmResult.isConfirmed) {
+                                            Swal.fire({
+                                                title: 'Confirma contraseña',
+                                                text: 'Ingresa tu contraseña para eliminar tu enlace.',
+                                                input: 'password',
+                                                inputPlaceholder: 'Ingrese su contraseña',
+                                                inputAttributes: {
+                                                    autocapitalize: 'off',
+                                                    autocorrect: 'off'
+                                                },
+                                                showCancelButton: true,
+                                                confirmButtonText: 'Confirmar',
+                                                cancelButtonText: 'Cancelar',
+                                                confirmButtonColor: '#1F4E67',
+                                                cancelButtonColor: '#d33',
+                                                preConfirm: (password) => {
+                                                    if (!password) {
+                                                        Swal.showValidationMessage('Debe ingresar su contraseña para confirmar');
+                                                    }
+                                                    return password;
+                                                }
+                                            }).then((passwordResult) => {
+                                                if (passwordResult.isConfirmed) {
+                                                    // Mostrar SweetAlert2 de carga mientras se elimina el enlace
+                                                    Swal.fire({
+                                                        title: 'Eliminando enlace...',
+                                                        text: 'Por favor, espera mientras eliminamos tu dato personal.',
+                                                        allowOutsideClick: false,
+                                                        allowEscapeKey: false,
+                                                        didOpen: () => {
+                                                            Swal.showLoading();
+                                                        }
+                                                    });
+
+                                                    // Enviar solicitud para eliminar el enlace
+                                                    fetch('/updateSocialLinks', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json'
+                                                        },
+                                                        body: JSON.stringify({
+                                                            socialLinks: { [seleccion]: '' },
+                                                            contrasena: passwordResult.value
+                                                        })
+                                                    })
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        Swal.close();
+                                                        if (data.success) {
+                                                            Swal.fire({
+                                                                icon: 'success',
+                                                                title: '¡Enlace eliminado!',
+                                                                text: 'El enlace se ha eliminado correctamente.',
+                                                                showConfirmButton: false,
+                                                                timer: 2000
+                                                            }).then(() => {
+                                                                location.reload();
+                                                            });
+                                                        } else {
+                                                            Swal.fire({
+                                                                icon: 'error',
+                                                                title: 'Error',
+                                                                text: data.error || 'No se pudo eliminar el enlace.',
+                                                                showConfirmButton: false,
+                                                                timer: 3000
+                                                            });
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        console.error("Error en la eliminación:", error);
+                                                        Swal.close();
+                                                        Swal.fire({
+                                                            icon: 'error',
+                                                            title: 'Error',
+                                                            text: 'Hubo un problema con la solicitud. Inténtalo nuevamente.',
+                                                            showConfirmButton: false,
+                                                            timer: 3000
+                                                        });
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+                            // Procesar y validar el input para actualizar el enlace
+                            let fullUrl;
+    
+                            if (seleccion === 'personal') {
+                                // Validación para URL personal
+                                if (!/^https?:\/\//.test(inputValue)) {
+                                    inputValue = inputValue.startsWith('www.') ? 'http://' + inputValue : 'http://' + inputValue;
+                                }
+                                if (!/^https?:\/\/.+\..+$/.test(inputValue)) {
+                                    Swal.fire('Error', 'Debes ingresar una URL válida que comience con http:// o https://', 'error');
+                                    return;
+                                }
+                                fullUrl = inputValue;
+                            } else if (seleccion === 'whatsapp') {
+                                // Validación para WhatsApp
+                                const soloNumeros = inputValue.replace(/[^0-9]/g, '');
+                                if (soloNumeros.length !== 13) {
+                                    Swal.fire('Error', 'El número debe contener exactamente 13 dígitos en formato internacional.', 'error');
+                                    return;
+                                }
+                                fullUrl = `${baseUrl}${soloNumeros}`;
+                            } else {
+                                // Validación para otros
+                                inputValue = inputValue.replace(/^(https?:\/\/)?(www\.)?/, '');
+                                fullUrl = `${baseUrl}${inputValue}`;
+                            }
+
+                            Swal.fire({
+                                title: 'Actualizando enlace...',
+                                text: 'Por favor, espera mientras actualizamos tu dato personal.',
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
+                            });
+
+                            // Enviar solicitud para actualizar el enlace
+                            fetch('/updateSocialLinks', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    socialLinks: { [seleccion]: fullUrl },
+                                    contrasena: null // No se necesita contraseña para actualizar
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                Swal.close();
+                                if (data.success) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: '¡Enlace actualizado!',
+                                        text: 'El enlace se ha actualizado correctamente.',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    }).then(() => {
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: data.error || 'No se pudo actualizar el enlace.',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                Swal.close();
+                                console.error("Error en la actualización:", error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Hubo un problema con la solicitud. Inténtalo nuevamente.',
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                });
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+    
+<!-- Script para gneracion de QR en los enlaces -->
+<script>
+  // Script para ocultar botones no configurados y generar QR solo para enlaces configurados
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a.social-link').forEach((link) => {
+        // Verificar si el enlace no está configurado (enlace vacío o '#')
+        if (link.href.endsWith('#')) {
+            link.style.display = 'none'; // Ocultar el botón si el enlace no está configurado
+        } else {
+            // Manejar la generación de QR solo para los enlaces configurados
+            link.addEventListener('click', async function (event) {
+                event.preventDefault(); // Prevenir el comportamiento predeterminado para generar el QR
+                const url = this.href;
+                const seleccion = this.getAttribute('data-social'); // Obtener la selección de la red social
+                const iconClass = this.getAttribute('data-icon'); // Obtener la clase del icono de la red social
+
+                // Mostrar SweetAlert de "Generando QR"
+                Swal.fire({
+                    title: 'Generando QR <i class="fas fa-qrcode ml-2"></i>',
+                    text: 'Por favor, espera mientras generamos tu código QR.',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    willOpen: () => {
+                        Swal.showLoading(); // Muestra el ícono de carga
+                    }
+                });
+
+                try {
+                    // Solicitar el código QR al backend
+                    const response = await fetch('/generateQRCode', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ url })
+                    });
+
+                    const data = await response.json();
+                    if (data.success && data.qrCodeUrl) {
+                        // Cerrar SweetAlert de carga
+                        Swal.close();
+
+                        // Mostrar SweetAlert principal con el código QR y el icono correspondiente
+                        Swal.fire({
+                            title: `Código QR: ${seleccion} <i class="${iconClass}"></i>`,
+                            text: `Puedes escanear este QR para acceder al perfil del humano en: ${seleccion}`,
+                            imageUrl: data.qrCodeUrl,
+                            imageWidth: 200,
+                            imageHeight: 200,
+                            imageAlt: 'Código QR',
+                            showConfirmButton: true,
+                            confirmButtonText: `<i class="${iconClass}"></i>`,
+                            confirmButtonColor: '#1F4E67',
+                            cancelButtonColor: '#d33',
+                            showCancelButton: true,
+                            cancelButtonText: 'Cerrar',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Redireccionar al enlace si se confirma
+                                window.open(url, '_blank');
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'No se pudo generar el código QR.',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    }
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Ocurrió un problema al generar el código QR.',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                }
+            });
+        }
+    });
+});
+</script>
+
+<!-- Scritp para modificar datos personales -->
+<script>
+function enviarCodigo() {
+    const nuevoTelefono = document.getElementById('telefono').value;
+    if (nuevoTelefono.trim() === "") {
+        Swal.fire({
+            title: 'Error',
+            text: 'El teléfono no puede estar vacío.',
+            icon: 'error'
+        });
+        return;
+    }
+
+    if (!/^\d{10}$/.test(nuevoTelefono)) {
+        Swal.fire({
+            title: 'Error',
+            text: 'El teléfono debe tener exactamente 10 dígitos.',
+            icon: 'error'
+        });
+        return;
+    }
+
+    Swal.fire({
+        title: `¿Estás seguro de que quieres cambiar el teléfono a "${nuevoTelefono}"?`,
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+        icon: 'question',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch('/updateTelefono', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ telefono: nuevoTelefono })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Código de verificación enviado',
+                        text: 'Por favor, ingrese el código de verificación que hemos enviado a su teléfono.',
+                        icon: 'info'
+                    }).then(() => {
+                        document.getElementById('verificacionContainer').style.display = 'block';
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.error || 'No se pudo enviar el código de verificación.',
+                        icon: 'error'
+                    });
+                }
+            });
+        }
+    });
+}
+
+function verificarCodigo() {
+    const codigo = document.getElementById('codigo').value;
+
+    if (codigo.trim() === "") {
+        Swal.fire({
+            title: 'Error',
+            text: 'El código de verificación no puede estar vacío.',
+            icon: 'error'
+        });
+        return;
+    }
+
+    fetch('/verifyCode', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code: codigo })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                title: 'Teléfono actualizado',
+                text: data.message,
+                icon: 'success'
+            }).then(() => location.reload());
+        } else {
+            Swal.fire({
+                title: 'Error',
+                text: data.error || 'Código de verificación incorrecto.',
+                icon: 'error'
+            });
+        }
+    });
+}
+    
+    function modificarCorreo() {
+        const nuevoCorreo = document.getElementById('correo').value;
+        if (nuevoCorreo.trim() === "") {
+            Swal.fire({
+                title: 'Error',
+                text: 'El correo electrónico no puede estar vacío.',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2000
+            });
+            return;
+        }
+    
+        if (!/\S+@\S+\.\S+/.test(nuevoCorreo)) {
+            Swal.fire({
+                title: 'Error',
+                text: 'El correo electrónico no es válido.',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2000
+            });
+            return;
+        }
+    
+        Swal.fire({
+            title: `¿Estás seguro de que quieres cambiar el correo electrónico a "${nuevoCorreo}"?`,
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No',
+            confirmButtonColor: '#1F4E67',
+            cancelButtonColor: '#d33',
+            icon: 'question',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch('/updateCorreo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ correo: nuevoCorreo })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            title: 'Correo electrónico actualizado',
+                            text: `Nuevo correo electrónico: ${nuevoCorreo}`,
+                            icon: 'success',
+                            showConfirmButton: false,
+                timer: 2000
+                        }).then(() => location.reload());
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: data.error || 'No se pudo actualizar el correo electrónico',
+                            icon: 'error',
+                            showConfirmButton: false,
+                timer: 2000
+                        });
+                    }
+                });
+            }
+        });
+    }
+    </script>
+
+<!-- Script para dirección -->
+<script>
+function modificarDireccion() {
+    const nuevaDireccion = document.getElementById('direccion').value;
+    const direccionActualElement = document.getElementById('direccionLabel'); // Obtener el label que muestra la dirección actual
+
+    if (!direccionActualElement) {
+        console.error('Elemento con id "direccionLabel" no encontrado en el DOM.');
+        return;
+    }
+
+    const direccionActual = direccionActualElement.innerText.trim(); // Obtener el texto del label
+
+    // Verificar si la dirección actual ya está eliminada y el input está vacío
+    if (direccionActual === "" && nuevaDireccion.trim() === "") {
+        Swal.fire({
+            title: 'La dirección ya está eliminada',
+            text: 'El campo de dirección ya está vacío.',
+            icon: 'info',
+            showConfirmButton: false,
+            timer: 2000
+        });
+        return;
+    }
+
+    // Si la nueva dirección está vacía pero la dirección actual no, proceder a eliminación
+    if (nuevaDireccion.trim() === "" && direccionActual !== "") {
+        Swal.fire({
+            title: 'Eliminará su dato personal: <br><i class="fas fa-map-marker-alt mr-2"></i>Dirección',
+            text: '¿Desea confirmar la eliminación de su dato personal?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'No',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#1F4E67',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Confirma contraseña',
+                    text: 'Ingresa tu contraseña para eliminar tu dirección.',
+                    input: 'password',
+                    inputPlaceholder: 'Ingrese su contraseña',
+                    inputAttributes: {
+                        autocapitalize: 'off',
+                        autocorrect: 'off'
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: 'Confirmar',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#1F4E67',
+                    cancelButtonColor: '#d33',
+                    preConfirm: (password) => {
+                        if (!password) {
+                            Swal.showValidationMessage('Debe ingresar su contraseña para confirmar');
+                        }
+                        return password;
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Eliminando dirección...',
+                            text: 'Por favor, espere mientras eliminamos su dirección.',
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+
+                        fetch('/updateDireccion', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                direccion: nuevaDireccion,
+                                contrasena: result.value
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    title: 'Dirección eliminada',
+                                    text: 'Su dirección ha sido eliminada correctamente.',
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(() => location.reload());
+                            } else {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: data.error || 'No se pudo eliminar la dirección',
+                                    icon: 'error',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        return;
+    }
+
+    // Verificar si la nueva dirección es igual a la dirección actual
+    if (nuevaDireccion === direccionActual) {
+        Swal.fire({
+            title: 'Sin cambios',
+            text: 'La dirección es la misma.',
+            icon: 'info',
+            showConfirmButton: false,
+            timer: 2000
+        });
+        return;
+    }
+
+    // Si hay una nueva dirección, proceder con la modificación
+    Swal.fire({
+        title: `Modificarás tu dirección <i class="fas fa-map-marker-alt "></i>`,
+        text: `¿Estás seguro de que quieres cambiar la dirección a: ${nuevaDireccion}?`,
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+        confirmButtonColor: '#1F4E67',
+        cancelButtonColor: '#d33',
+        icon: 'question',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Actualizando dirección...',
+                text: 'Por favor, espere mientras actualizamos su dirección.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            fetch('/updateDireccion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ direccion: nuevaDireccion })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: '<i class="fas fa-map-marker-alt mr-2 "></i>Dirección actualizada',
+                        text: `Nueva dirección: ${nuevaDireccion}`,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(() => location.reload());
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.error || 'No se pudo actualizar la dirección',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            });
+        }
+    });
+}
+</script>
+
+ <!-- Script para modificar contraseña-->
+ <script>
+    function modificarContrasena() {
+    const contrasenaActual = document.getElementById('contrasena-actual').value;
+    const nuevaContrasena = document.getElementById('nueva-contrasena').value;
+    const confirmarContrasena = document.getElementById('confirmar-contrasena').value;
+
+    if (nuevaContrasena.trim() === "" || confirmarContrasena.trim() === "") {
+        Swal.fire({
+            title: 'Error',
+            text: 'La nueva contraseña no puede estar vacía.',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2000
+        });
+        return;
+    }
+
+    if (nuevaContrasena !== confirmarContrasena) {
+        Swal.fire({
+            title: 'Error',
+            text: 'Las nuevas contraseñas no coinciden.',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2000
+        });
+        return;
+    }
+
+    if (nuevaContrasena.length < 8 || nuevaContrasena.length > 20) {
+        Swal.fire({
+            title: 'Error',
+            text: 'La contraseña debe tener entre 8 y 20 caracteres.',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2000
+        });
+        return;
+    }
+
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/;
+    if (!regex.test(nuevaContrasena)) {
+        Swal.fire({
+            title: 'Error',
+            text: 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número.',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2000
+        });
+        return;
+    }
+ 
+    Swal.fire({
+        title: '¿Estás seguro de que quieres cambiar la contraseña?',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+        confirmButtonColor: '#1F4E67',
+        cancelButtonColor: '#d33',
+        icon: 'question',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch('/updatePassword', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ contrasenaActual, nuevaContrasena })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Contraseña actualizada',
+                        text: 'Su contraseña ha sido actualizada con éxito.',
+                        icon: 'success',
+                        showConfirmButton: false,
+            timer: 2000
+                    }).then(() => location.reload());
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.error || 'No se pudo actualizar la contraseña',
+                        icon: 'error',
+                        showConfirmButton: false,
+            timer: 2000
+                    });
+                }
+            });
+        }
+    });
+    }
+    </script>
+
+<!-- Script billetera y tarjeta -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Cargar datos personales desde el servidor
+        const tarjetaDebito = "<%= Tarjetadebito %>";
+        const billeteraCripto = "<%= BilleteraCripto %>";
+    
+        const tarjetaList = document.getElementById('tarjetaList');
+        const walletList = document.getElementById('walletList');
+        const btnTarjeta = document.getElementById('btnTarjeta');
+        const btnBilletera = document.getElementById('btnBilletera');
+    
+        // Mostrar Tarjeta de Débito con formato XXXX-XXXX-XXXX-XXXX
+        actualizarVistaTarjeta(tarjetaDebito);
+    
+        // Mostrar Billetera Cripto
+        actualizarVistaBilletera(billeteraCripto);
+    });
+    
+    function formatearTarjeta(numero) {
+        return numero.replace(/(\d{4})(?=\d)/g, '$1-'); // Formatear en grupos de 4 dígitos separados por '-'
+    }
+    
+    function validarTarjeta(numero) {
+        const num = numero.replace(/-/g, ''); // Eliminar guiones para validar longitud
+    
+        // Verificar longitud válida de 16 dígitos
+        if (num.length !== 16) return false;
+    
+        // Validación básica sin algoritmo de Luhn
+        return /^\d{16}$/.test(num); // Verificar que solo contenga números
+    }
+    
+    function validarBilleteraCripto(direccion) {
+        // Verificar la longitud de la dirección (26 a 35 caracteres)
+        if (direccion.length < 26 || direccion.length > 35) {
+            return false;
+        }
+    
+        // Verificar que solo contenga caracteres válidos (alfanuméricos, sin O, I, l, 0)
+        const caracteresValidos = /^[A-HJ-NP-Za-km-z1-9]+$/;
+        if (!caracteresValidos.test(direccion)) {
+            return false;
+        }
+    
+        return true; // La dirección es válida si pasa todas las verificaciones
+    }
+    
+    function manejarTarjeta() {
+    const btnTarjeta = document.getElementById('btnTarjeta');
+    const tarjetaList = document.getElementById('tarjetaList');
+
+    const tarjetaExistente = "<%= Tarjetadebito %>";
+    let esModificar = tarjetaExistente !== "";
+
+    Swal.fire({
+        title: esModificar ? '<i class="far fa-credit-card mr-2"></i>Modificar Tarjeta' : '<i class="far fa-credit-card mr-2"></i>Agregar Nueva Tarjeta',
+        input: 'text',
+        inputLabel: 'Número de Tarjeta',
+        inputValue: esModificar ? formatearTarjeta(tarjetaExistente) : '', // Si es modificar, usar valor actual formateado
+        inputPlaceholder: 'XXXX-XXXX-XXXX-XXXX',
+        showCancelButton: true,
+        confirmButtonText: esModificar ? 'Modificar' : 'Agregar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor:'#1F4E67',
+        cancelButtonColor: '#d33',
+        inputAttributes: {
+            maxlength: 19, // Permitir solo 19 caracteres (16 dígitos y 3 guiones)
+            inputmode: 'numeric' // Solo entrada numérica
+        },
+        inputValidator: (value) => {
+            if (!value) {
+                return 'El número de tarjeta es requerido';
+            }
+            if (!validarTarjeta(value)) {
+                return 'El número de tarjeta no es válido';
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if (formatearTarjeta(tarjetaExistente) === result.value) {
+                Swal.fire({
+                    title: 'Sin cambios',
+                    text: 'El número de tarjeta es el mismo.',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Actualizando tarjeta...',
+                text: 'Por favor, espere mientras actualizamos su tarjeta.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            fetch('/updateTarjetaDebito', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ Tarjetadebito: result.value.replace(/\D/g, '') }) // Guardar sin formato
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    actualizarVistaTarjeta(result.value);
+                    Swal.fire({
+                        title: 'Tarjeta Actualizada',
+                        text: `Número de tarjeta ${formatearTarjeta(result.value)} actualizado con éxito.`,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(() => {
+                        // Recargar página para reflejar los cambios
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire('Error', data.error || 'No se pudo procesar la solicitud', 'error');
+                }
+            })
+            .catch(error => {
+                Swal.fire('Error', 'Ocurrió un error al actualizar la tarjeta. Intente nuevamente.', 'error');
+            });
+        }
+    });
+}
+
+function manejarBilletera() {
+    const btnBilletera = document.getElementById('btnBilletera');
+    const walletList = document.getElementById('walletList');
+
+    const billeteraExistente = "<%= BilleteraCripto %>";
+    let esModificar = billeteraExistente !== "";
+
+    Swal.fire({
+        title: esModificar ? '<i class="fab fa-bitcoin mr-2"></i>Modificar Billetera' : '<i class="fab fa-bitcoin mr-2"></i>Agregar Nueva Billetera',
+        input: 'text',
+        inputLabel: 'Dirección de Billetera',
+        inputValue: esModificar ? billeteraExistente : '', // Si es modificar, usar valor actual
+        inputPlaceholder: 'Ingrese la dirección de billetera',
+        showCancelButton: true,
+        confirmButtonColor:'#1F4E67',
+        cancelButtonColor: '#d33',
+        confirmButtonText: esModificar ? 'Modificar' : 'Agregar',
+        cancelButtonText: 'Cancelar',
+        inputAttributes: {
+            maxlength: 40 // Limitar a 40 caracteres máximo
+        },
+        inputValidator: (value) => {
+            if (!value) {
+                return 'La dirección de billetera <i class="fab fa-bitcoin ml-2 mr-2"></i> es requerida';
+            }
+            if (!validarBilleteraCripto(value)) {
+                return 'La dirección de billetera  <i class="fab fa-bitcoin ml-2 mr-2"></i> no es válida';
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if (billeteraExistente === result.value) {
+                Swal.fire({
+                    title: 'Sin cambios',
+                    text: 'La dirección de billetera es la misma.',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Actualizando billetera...',
+                text: 'Por favor, espere mientras actualizamos su billetera.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            fetch('/updateBilleteraCripto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ BilleteraCripto: result.value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    actualizarVistaBilletera(result.value);
+                    Swal.fire({
+                        title: 'Billetera Actualizada',
+                        text: `Dirección de billetera ${result.value} actualizada con éxito.`,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(() => {
+                        // Recargar página para reflejar los cambios
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire('Error', data.error || 'No se pudo procesar la solicitud', 'error');
+                }
+            })
+            .catch(error => {
+                Swal.fire('Error', 'Ocurrió un error al actualizar la billetera. Intente nuevamente.', 'error');
+            });
+        }
+    });
+}
+    
+    function actualizarVistaTarjeta(tarjeta) {
+        const tarjetaList = document.getElementById('tarjetaList');
+        const btnTarjeta = document.getElementById('btnTarjeta');
+    
+        if (tarjeta) {
+            tarjetaList.innerHTML = `
+                <div class="card-group">
+                    <i class="far fa-credit-card"></i> ${formatearTarjeta(tarjeta)}
+                    <button class="btn btn-danger btn-sm" onclick="confirmarEliminar(this, 'tarjeta')">Eliminar</button>
+                </div>
+            `;
+            btnTarjeta.innerHTML = '<i class="far fa-credit-card mr-2"></i> Modificar Tarjeta';
+        } else {
+            tarjetaList.innerHTML = '';
+            btnTarjeta.innerHTML = '<i class="far fa-credit-card mr-2"></i> Agregar Tarjeta';
+        }
+    }
+    
+    function actualizarVistaBilletera(billetera) {
+        const walletList = document.getElementById('walletList');
+        const btnBilletera = document.getElementById('btnBilletera');
+    
+        if (billetera) {
+            walletList.innerHTML = `
+                <div class="wallet-group">
+                    <i class="fab fa-bitcoin"></i> ${billetera}
+                    <button class="btn btn-danger btn-sm" onclick="confirmarEliminar(this, 'billetera')">Eliminar</button>
+                </div>
+            `;
+            btnBilletera.innerHTML = '<i class="fab fa-bitcoin mr-2"></i> Modificar Billetera';
+        } else {
+            walletList.innerHTML = '';
+            btnBilletera.innerHTML = '<i class="fab fa-bitcoin mr-2"></i> Agregar Billetera';
+        }
+    }
+    
+    function confirmarEliminar(elemento, tipo) {
+    const mensaje = tipo === 'tarjeta' ? '<i class="far fa-credit-card mr-2"></i> Número de Tarjeta' : ' <i class="fab fa-bitcoin mr-2"></i> Billetera';
+    Swal.fire({
+        title: `Eliminará su dato personal: ${mensaje}`,
+        text: `¿Desea confirmar la eliminación de su dato personal?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'No',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#1F4E67',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Confirma contraseña',
+                text: 'Ingresa tu contraseña para eliminar tu dato personal.',
+                input: 'password',
+                inputPlaceholder: 'Ingrese su contraseña',
+                inputAttributes: {
+                    autocapitalize: 'off',
+                    autocorrect: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Confirmar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#1F4E67',
+                cancelButtonColor: '#d33',
+                preConfirm: (password) => {
+                    if (!password) {
+                        Swal.showValidationMessage('Debe ingresar su contraseña para confirmar');
+                    }
+                    return password;
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Eliminando...',
+                        text: 'Por favor, espere mientras eliminamos su dato personal.',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    const endpoint = tipo === 'tarjeta' ? '/deleteTarjetaDebito' : '/deleteBilleteraCripto';
+                    fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ contrasena: result.value })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                title: 'Dato Personal eliminado',
+                                text: 'Su dato personal ha sido eliminado correctamente.',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then(() => {
+                                elemento.parentElement.remove();
+                                
+                                // Actualizar la vista de acuerdo al tipo eliminado
+                                if (tipo === 'tarjeta') {
+                                    actualizarVistaTarjeta('');
+                                } else {
+                                    actualizarVistaBilletera('');
+                                }
+                            });
+                        } else {
+                            Swal.fire('Error', data.error || 'No se pudo eliminar el dato personal', 'error');
+                        }
+                    });
+                }
+            });
+        }
+    });
+}
+    </script>
+
+    <!-- Script para toggler -->
+    <script>
+        // Usar DOMContentLoaded para ejecutar el script tan pronto como se carga el DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleSwitch = document.getElementById('toggleSwitch');
+            toggleSwitch.checked = <%= JSON.stringify(toggleState) %>; // Utilizar el valor recuperado de la base de datos como booleano
+            toggleBlur(); // Aplicar el efecto de desenfoque según el estado almacenado 
+        });
+
+    function toggleBlur() {
+        const toggleSwitch = document.getElementById('toggleSwitch');
+        const nombreElement = document.getElementById("nombreID");
+        const humanoElement = document.getElementById("humanoID");
+        const telefonoLabel = document.getElementById("telefonoLabel");
+        const correoLabel = document.getElementById("correoLabel");
+        const direccionLabel = document.getElementById("direccionLabel");
+        const descripcionUsuario = document.getElementById("descripcionUsuario");
+        
+        // Alternar la clase de desenfoque para todos los elementos
+        const shouldBlur = toggleSwitch.checked;
+        nombreElement.classList.toggle("blurred", shouldBlur);
+        humanoElement.classList.toggle("blurred", shouldBlur);
+        descripcionUsuario.classList.toggle("blurred", shouldBlur);
+        telefonoLabel.classList.toggle("blurred", shouldBlur);
+        correoLabel.classList.toggle("blurred", shouldBlur);
+        direccionLabel.classList.toggle("blurred", shouldBlur);
+
+        // Enviar una solicitud al servidor para actualizar el estado del interruptor
+        fetch('/toggle', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ toggleState: toggleSwitch.checked })
+        })
+        .then(response => {
+            // Verifica si la respuesta es JSON
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                console.log('Estado del toggle guardado correctamente.');
+            } else {
+                console.error('Error al guardar el estado del toggle:', data.error || data.message);
+            }
+        })
+        .catch(error => console.error('Error al enviar la solicitud:', error));
+    }
+    </script>
+
+    <!-- Script para comprar nueva tarjeta -->
+    <script>
+        async function comprarNuevaTarjeta() {
+            // Mostrar SweetAlert2 de carga
+            Swal.fire({
+                title: 'Cargando...',
+                text: 'Por favor, espera mientras verificamos el estado de su tarjeta.',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+    
+            try {
+                const humanoID = '<%= humanoID %>'; // Asegúrate de que este valor se reemplace correctamente
+    
+                // Verificar el estado de la tarjeta
+                const response = await fetch('/verificarEstado', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ humanoID })
+                });
+    
+                const data = await response.json();
+    
+                if (data.estado === 'no-encontrado') {
+                    Swal.fire('Error', 'Humano no encontrado', 'error');
+                    return;
+                }
+
+                if (data.estado === 'inactivo') {
+                    Swal.fire('Advertencia', 'Tu tarjeta actual ya está inactiva. Ahora puedes comprar una nueva.', 'warning');
+                } else {
+                    const { isConfirmed } = await Swal.fire({
+                        title: 'Reportar Tarjeta',
+                        text: 'Para comprar una nueva tarjeta, primero debes reportar la actual como inactiva. ¿Deseas proceder?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Reportar',
+                        confirmButtonColor: '#1F4E67',
+                        cancelButtonColor: '#d33',
+                        cancelButtonText: 'Cancelar'
+                    });
+    
+                    if (isConfirmed) {
+                        const reportResponse = await fetch('/actualizarEstado', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ humanoID })
+                        });
+    
+                        const reportData = await reportResponse.json();
+    
+                        if (reportData.estado === 'error') {
+                            Swal.fire('Error', 'No se pudo reportar la tarjeta', 'error');
+                            return;
+                        }
+    
+                        Swal.fire('Tarjeta reportada', 'Tu tarjeta ha sido reportada como inactiva. Ahora puedes comprar una nueva.', 'success');
+                    } else {
+                        return;
+                    }
+                }
+
+                // Obtener tarjetaID desde el usuario
+                 const tarjetaID = '<%= tarjetaID %>'; // Asegúrate de que este valor esté disponible
+
+                 if (!tarjetaID || tarjetaID.trim() === '') {
+            Swal.fire('Error', 'No se pudo obtener el tarjetaID', 'error');
+            return;
+        }
+
+                // Solicitar confirmación de pago
+                const { isConfirmed } = await Swal.fire({
+                    title: 'Confirmación de Pago',
+                    text: '¿Quieres pagar $500.00 MXN por la nueva tarjeta?',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Pagar',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#1F4E67',
+                    cancelButtonColor: '#d33',
+                });
+    
+                if (isConfirmed) {
+                    // Crear sesión de pago
+                    const pagoResponse = await fetch('/crearSesionPago', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ amount: 50000, tarjetaID  }) // $500.00 MXN
+                    });
+    
+                    if (!pagoResponse.ok) {
+                        throw new Error('Error al crear la sesión de pago');
+                    }
+    
+                    const pagoData = await pagoResponse.json();
+                    if (pagoData.error) {
+                        Swal.fire('Error', 'No se pudo procesar el pago', 'error');
+                        return;
+                    }
+    
+                    const stripe = Stripe('pk_test_51NDWZRLrN3V7k2i5WI7lnmw0OR7wFUORVguFqCtAZfbPBr4fRy7FZyyyP2gkl4CNNSzOs7c6gsQxftpE02TSwQ8v00SBOGDBTR');
+    
+                    // Redirigir a Stripe para completar el pago
+                    const { error } = await stripe.redirectToCheckout({ sessionId: pagoData.id });
+    
+                    if (error) {
+                        Swal.fire('Error', 'Hubo un problema al redirigir a Stripe', 'error');
+                    }
+                }
+            } catch (error) {
+                console.error('Error durante la compra de la tarjeta:', error);
+                Swal.fire('Error', 'Hubo un problema al procesar tu solicitud. Inténtalo de nuevo.', 'error');
+            }
+        }
+    </script>
+    <!-- Confirmar Pago -->
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const estadoPago = urlParams.get('estado_pago');
+
+        if (estadoPago === 'exitoso') {
+            // Mostrar SweetAlert2 de éxito
+            Swal.fire({
+                title: 'Pago Exitoso',
+                text: 'Tu pago se ha completado con éxito. ¡Gracias por tu compra!',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#1F4E67'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirigir al usuario a otra página o actualizar la página actual
+                    window.location.href = '/';
+                }
+            });
+        } else if (estadoPago === 'cancelado') {
+            // Mostrar SweetAlert2 de cancelación
+            Swal.fire({
+                title: 'Pago Cancelado',
+                text: 'Tu pago ha sido cancelado. Puedes intentar nuevamente más tarde.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#d33'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirigir al usuario a otra página o actualizar la página actual
+                    window.location.href = '/';
+                }
+            });
+        }
+    });
+</script>    
+
+    <!-- Script para eliminar perfil -->
+    <script>
+        async function eliminarPerfil() {
+            // Primer diálogo de confirmación
+            const confirmResult = await Swal.fire({
+                title: "¿Estás seguro de que quieres eliminar tu perfil?",
+                text: "Al eliminar tu perfil, no  podrás recuperar los datos personales que contiene esta cuenta, y tu tarjeta física y digital serán desactivadas.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#1F4E67",
+                confirmButtonText: "Sí, eliminar perfil",
+                cancelButtonText: "Cancelar",
+            });
+
+            if (confirmResult.isConfirmed) {
+                // Solicitar la contraseña del usuario
+                const passwordResult = await Swal.fire({
+                    title: "Confirmar contraseña",
+                    input: 'password',
+                    inputLabel: 'Introduce tu contraseña para confirmar',
+                    inputPlaceholder: 'Contraseña',
+                    inputAttributes: {
+                        autocapitalize: 'off',
+                        autocorrect: 'off'
+                    },
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#1F4E67",
+                    confirmButtonText: "Eliminar perfil",
+                    cancelButtonText: "Cancelar",
+                    inputValidator: (value) => {
+                        if (!value) {
+                            return '¡La contraseña es requerida!';
+                        }
+                    }
+                });
+
+                if (passwordResult.isConfirmed) {
+                    try {
+                        const response = await fetch('/eliminarPerfil', {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ contrasena: passwordResult.value })
+                        });
+
+                        const data = await response.json();
+                        if (data.success) {
+                            Swal.fire({
+                                title: "Perfil eliminado",
+                                text: "Tu perfil ha sido eliminado.",
+                                icon: "success",
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Error",
+                                text: data.error || 'No se pudo eliminar el perfil',
+                                icon: "error"
+                            });
+                        }
+                    } catch (error) {
+                        Swal.fire({
+                            title: "Error",
+                            text: 'Ocurrió un error al intentar eliminar el perfil',
+                            icon: "error"
+                        });
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <% } %>
+</body>
+</html>

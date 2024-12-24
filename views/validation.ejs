@@ -1,0 +1,292 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><%= title %></title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Iceland&display=swap" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+            body {
+                font-family: 'Iceland', sans-serif;
+                background-color: #f0f2f5;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+            .navbar {
+                background: #fff;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                justify-content: center; 
+            }
+            .navbar-brand img {
+                height: 60px;
+            }
+            .blue-text {
+                color: #1F4E67;
+                font-size: 40px;
+            }
+            .red-text {
+                color: #d71d00;
+                font-size: 40px;
+            }
+            .form-container {
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+                border: 1px solid #d71d00;
+                background: #fff;
+                border-radius: 20px;
+                padding: 30px;
+                margin: auto;
+                max-width: 400px;
+                width: 100%;
+                text-align: center;
+            }
+            .form-container h2 {
+                margin-bottom: 20px;
+            }
+            .form-container input {
+                border-radius: 30px;
+                margin-bottom: 20px;
+                border: 1px solid #1F4E67;
+                height: 50px;
+                padding: 10px 20px;
+            }
+            .btn-primary {
+                border-radius: 30px;
+                background-color: #1F4E67;
+                border: none;
+                height: 50px;
+                font-size: 18px;
+                transition: background-color 0.3s;
+            }
+            .btn-primary:hover {
+                background-color: #d71d00;
+            }
+            .footer {
+                color: #000;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 3rem;
+                padding: 1rem;
+                font-size: 15px;
+                width: 100%;
+                text-align: center;
+            }
+            .footer img {
+                width: 80px;
+                height: 80px;
+                border-radius: 20px;
+            }
+            .validation-form {
+                border-radius: 30px;
+                box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+                background-color: #f5f5f5;
+                padding: 1rem;
+            }
+            .validation-form h3 {
+                color: #000;
+            }
+            .validation-form button {
+                border-radius: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Nav -->
+        <nav class="navbar navbar-expand-lg navbar-light animate__animated animate__fadeInDown">
+            <a class="navbar-brand" href="https://www.humansystem.mx">
+            <img src="https://storage.googleapis.com/humansystem/simp-logo.png" alt="Logo">
+                <span class="brand-name font-weight-bold">
+                    <em>
+                        <span class="blue-text">Human </span>
+                        <span class="red-text">System</span>
+                    </em>
+                </span>
+            </a>
+        </nav>
+        <!-- Main Content -->
+        <div class="container mt-5 d-flex justify-content-center">
+            <div class="form-container">
+                <form id="validacionForm">
+                    <div class="pb-2">
+                        <h3 class="mb-2 font-weight-bold">
+                            <em>Validación digital</em>
+                            <i class="ml-2 fas fa-shield-alt"></i>
+                        </h3>
+                    </div>
+                    <h6 class="mb-4">Ingresa el número de tarjeta o humano:</h6>
+                    <div class="mb-3">
+                        <input class="form-control" id="tokenInput" name="token" placeholder="XXXX-XXXX-XXXX-XXXX" type="text" readonly>
+                    </div>
+                    <button class="btn btn-primary" id="validarBtn" type="submit">
+                        <i class="fas fa-search mr-2"></i> Validar
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="footer mt-5">
+            <a href="#" class="mb-2">
+                <img src="https://storage.googleapis.com/humansystem/Logo.png" alt="Logo">
+            </a>
+            <small class="font-weight-bold">
+                © 2024 Human Technology Identification.<br>Todos los derechos reservados.
+            </small>
+        </div>
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <!-- Script para manejar validación -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encryptedToken = urlParams.get('token');
+            const tokenInput = document.getElementById('tokenInput'); 
+            const form = document.getElementById('validacionForm');
+
+            if (encryptedToken && tokenInput) {
+                tokenInput.value = encryptedToken;
+
+                // Enviar el formulario de manera asíncrona
+                await enviarFormulario(encryptedToken); // Enviar automáticamente solo una vez al cargar la página
+            } else if (!encryptedToken) {
+                Swal.fire({
+                    title: "Error",
+                    text: "Token no encontrado.",
+                    icon: "error",
+                    confirmButtonText: "Cerrar"
+                });
+            }
+        });
+
+        async function enviarFormulario(token) {
+            // Mostrar Swal de carga
+            const loadingSwal = Swal.fire({
+                title: 'Cargando',
+                text: 'Por favor, espere...',
+                icon: 'info',
+                showConfirmButton: false,
+                didOpen: () => Swal.showLoading()
+            });
+
+            try {
+                const response = await fetch('/validar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token })
+                });
+
+                if (!response.ok) throw new Error('Error en la respuesta del servidor');
+                const data = await response.json();
+
+                let swalTitle = "Estado del humano";
+                let swalText = "";
+                let swalIcon = "info";
+
+                // Manejo de los estados del humano y la tarjeta
+                if (data.estadoHumano && data.estadoTarjeta) {
+                    swalTitle = `Humano ${data.estadoHumano}`;
+                    switch (data.estadoTarjeta) {
+                        case 'activado':
+                            swalIcon = 'success';
+                            swalText = `El humano está activo, y su tarjeta está activada`;
+                            break;
+                        case 'inactivo':
+                            swalIcon = 'warning';
+                            swalText = `El humano está inactivo, y su tarjeta ha sido reportada como perdida`;
+                            break;
+                        case 'comprado':
+                            swalIcon = 'info';
+                            swalText = `El humano está registrado, y su tarjeta ha sido comprada`;
+                            break;
+                        case 'reportado':
+                            swalIcon = 'error';
+                            swalText = `El humano está reportado`;
+                            break;
+                        default:
+                            swalIcon = 'error';
+                            swalText = "No se pudo validar el certificado";
+                            break;
+                    }
+                } else if (data.estadoTarjeta) {
+                    switch (data.estadoTarjeta) {
+                        case 'activado':
+                            swalTitle = "Tarjeta activada";
+                            swalText = "La tarjeta está activa";
+                            swalIcon = "success";
+                            break;
+                        case 'inactivo':
+                            swalTitle = "Tarjeta perdida";
+                            swalText = "La tarjeta está reportada como perdida";
+                            swalIcon = "warning";
+                            break;
+                        case 'comprado':
+                            swalTitle = "Tarjeta comprada";
+                            swalText = "La tarjeta será recibida pronto";
+                            swalIcon = "info";
+                            break;
+                        case 'reportado':
+                            swalTitle = "Tarjeta reportada";
+                            swalText = "Porfavor comuniquese a info@humansystem.mx";
+                            swalIcon = "error";
+                            break;
+                        default:
+                            swalTitle = "Error";
+                            swalText = "No se pudo validar la tarjeta";
+                            swalIcon = "error";
+                            break;
+                    }
+                } else {
+                    swalTitle = "Error";
+                    swalText = data.message;
+                    swalIcon = "error";
+                }
+
+                Swal.fire({
+                    title: swalTitle,
+                    text: swalText,
+                    icon: swalIcon,
+                    timer: 3000,
+                    showConfirmButton: false,
+                }).then(() => {
+                    loadingSwal.close(); // Cerrar Swal de carga después de mostrar el resultado
+                });
+
+            } catch (error) {
+                Swal.fire({
+                    title: "Error",
+                    text: "Hubo un problema con la validación",
+                    icon: "error",
+                    timer: 3000,
+                    showConfirmButton: false,
+                });
+            }
+        }
+
+        // Manejo del envío manual al hacer clic en el botón
+        document.getElementById('validacionForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const token = document.getElementById('tokenInput').value;
+
+            if (!token) {
+                return Swal.fire({
+                    title: "Error",
+                    text: "Por favor, ingresa el número de tarjeta o humano",
+                    icon: "warning",
+                    timer: 3000,
+                    showConfirmButton: false,
+                });
+            }
+
+            await enviarFormulario(token); // Enviar cuando el usuario hace clic en el botón
+        });
+    </script>      
+    </body>
+    </html>

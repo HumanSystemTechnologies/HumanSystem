@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="icon" href="https://i.ibb.co/G3XDtMJ/Logoapp.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Iceland&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: 'Iceland', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-nav .nav-link {
+            font-family: 'Play', sans-serif;
+        }
+        .navbar-nav .nav-link:hover {
+            background-color: #dcdcdc;
+        }
+        .navbar-nav .nav-link.registro {
+            background-color: #d71d00;
+            color: white;
+        }
+        .navbar-nav .nav-link.registro:hover {
+            background-color: #4e1d16;
+        }
+        .blue-text {
+            color: #1F4E67;
+            font-size: 40px;
+        }
+        .red-text {
+            color: #d71d00;
+            font-size: 40px;
+        }
+        .form-background {
+            flex-grow: 1;
+            background-image: url('https://storage.googleapis.com/humansystem/login.png');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-container {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #d71d00;
+            padding: 30px;
+            margin-top: 80px;
+            margin-bottom: 80px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .form-container h2 {
+            margin-bottom: 20px;
+        }
+        .form-container input {
+            border-radius: 30px;
+            margin-bottom: 20px;
+            border: 1px solid #1F4E67;
+            height: 50px;
+            padding: 10px 20px;
+        }
+        .form-container .btn-primary {
+            border-radius: 30px;
+            background-color: #1F4E67;
+            border: none;
+            height: 50px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .form-container .btn-primary:hover {
+            background-color: #d71d00;
+        }
+        .brand-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            justify-content: center;
+        }
+        .form-check-input {
+            margin-right: 80px;
+            margin-top: 20px;
+        }
+        .form-check-label {
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+        .google-login-btn {
+            background-color: #4285F4;
+            border: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        .google-login-btn:hover {
+            background-color: #357ae8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg navbar-light animate__animated animate__fadeInDown">
+        <a class="navbar-brand" href="#">
+            <img class="align-items-center" src="https://storage.googleapis.com/humansystem/simp-logo.png" width="auto" height="60" alt="Logo">
+            <span class="brand-name navbar-title font-weight-bold">
+                <em>
+                    <span class="blue-text">Human </span> 
+                    <span class="red-text">System</span>
+                </em>
+            </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="color: black; border-color: black;">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto align-items-center">
+              <!--   <li class="nav-item ml-3">
+                    <a class="nav-link info parpadea" href="#info">
+                        <i class="fas fa-info-circle animate__animated animate__pulse animate__infinite"></i>
+                    </a>
+                </li>    -->
+                <li class="nav-item">
+                    <a class="nav-link registro parallelogram-button selected pl-2 pr-2" style="font-size: 15px;" href="register">
+                        <i class="fas fa-user-plus" style="font-size: 15px;"></i> Regístrate
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Formulario Inicio de Sesión -->
+    <div class="form-background">
+        <div class="form-container">
+            <img src="https://storage.googleapis.com/humansystem/simp-logo.png" alt="Logo" class="brand-logo animate__animated animate__backInDown">
+            <h2 class="animate__animated animate__fadeInLeft"><em class="font-weight-bold">Inicio de sesión</em></h2>
+            <form id="loginForm" action="/auth" method="POST">
+                <input type="text" name="humano" class="form-control animate__animated animate__fadeInRight" id="humanoInput" placeholder="ID, Celular, Correo, CURP, RFC" minlength="8" maxlength="30" oninput="this.value = this.value.toUpperCase()">
+                <input type="password" name="contraseña" class="form-control animate__animated animate__fadeInRight" id="passwordInput" minlength="8" maxlength="20" placeholder="Contraseña">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me" value="remember-me">
+                    <label class="form-check-label" for="rememberMe">Recordarme</label>
+                </div>
+                <button class="btn btn-primary w-100 animate__animated animate__fadeInRight" type="submit"><i class="fas fa-sign-in-alt mr-2"></i> Ingresa</button>
+                <div class="google-login-btn" id="googleLoginBtn">
+                    <i class="fab fa-google mr-2"></i> Iniciar sesión con Google
+                </div>
+                <a href="#" id="forgotPasswordLink" class="d-block mt-3 text-decoration-none">Olvidé mi contraseña</a>
+            </form>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        document.getElementById('forgotPasswordLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Recuperar Contraseña',
+                input: 'text',
+                inputLabel: 'Introduce tu correo electrónico o teléfono',
+                inputPlaceholder: 'Correo electrónico o teléfono',
+                showCancelButton: true,
+                confirmButtonText: 'Enviar',
+                cancelButtonText: 'Cancelar',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return '¡Este campo es obligatorio!';
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Aquí puedes manejar el envío del correo electrónico o teléfono para la recuperación de contraseña
+                    Swal.fire(
+                        '¡Enviado!',
+                        'Te hemos enviado un enlace para recuperar tu contraseña.',
+                        'success'
+                    );
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const googleLoginBtn = document.getElementById('googleLoginBtn');
+            googleLoginBtn.addEventListener('click', function() {
+                // Aquí puedes agregar la lógica para el inicio de sesión con Google
+                Swal.fire({
+                    title: 'Servicio aun no disponible',
+                    text: 'Esta funcionalidad está en desarrollo.',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            });
+        });
+    </script>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        const humanoInput = document.getElementById('humanoInput').value;
+        const passwordInput = document.getElementById('passwordInput').value;
+    
+        if (!humanoInput || !passwordInput) {
+            Swal.fire({
+                title: 'Ingresa',
+                text: 'Ingresa tus datos personales',
+                icon: 'question',
+                showConfirmButton: false,
+                timer: 2300
+            });
+            return;
+        }
+    
+        // Enviar los datos mediante fetch
+        fetch('/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ humano: humanoInput, contraseña: passwordInput })
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json(); // Procesar respuesta exitosa
+            } else {
+                return response.json().then(data => {
+                    throw new Error(data.alertMessage || 'Error desconocido');
+                });
+            }
+        })
+        .then(data => {
+            Swal.fire({
+                title: data.alertTitle || 'Bienvenido',
+                text: data.alertMessage || 'Inicio de sesión exitoso',
+                icon: data.alertIcon || 'success',
+                showConfirmButton: false,
+                timer: 3000
+            }).then(() => {
+                window.location.href = data.ruta || '/';
+            });
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error',
+                text: error.message || 'Ocurrió un problema al iniciar sesión.',
+                icon: 'error',
+                showConfirmButton: true
+            });
+        });
+    });
+    </script>
+</body>
+</html>
